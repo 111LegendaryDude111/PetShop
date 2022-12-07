@@ -1,0 +1,47 @@
+footer{
+    background-color: yellow;
+    display: flex;
+    justify-content: space-around;
+    padding: 31px;
+}
+
+.footerLogo{
+    font-size: 4rem;
+}
+
+.firstColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+.secondColumn{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+}
+
+.thirdColumn{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+}
+
+.fourthColumn{
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+
+.footer_social{
+    display: flex;
+    font-size: 1.5rem;
+    margin: auto;
+}
+
+.footer_social_margin{
+    margin: 0 0.4rem;
+}
+
+.vk{
+    margin-left: 0.3rem;
+}

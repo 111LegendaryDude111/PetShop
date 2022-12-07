@@ -19,8 +19,8 @@
 
 .fa_heart_style {
     content: "\f004";
-    margin-right: 20px;
-    font-size: 30px;
+    margin-right: 1.5rem;
+    font-size: 2rem;
 }
 .searchInput{
     font-size: 2rem;
@@ -33,19 +33,15 @@
     padding: 2rem;
     text-align: center; 
 
-    &::after{
-        content:'a';
-        background-color: red;
-        width: 100%;
-        height: 100%;
-    }
 }
 
-// .inputCross{
-//     font-size: 47px;
-//     margin-left: -50px;
-//     position: relative
-// }
+.cross{
+    content: "\f004";
+    font-size: 2rem;
+    margin-left: -2.7rem;
+    position: relative;
+    opacity: 0.2;
+}
 
 .btn{
     font-size: 30px;

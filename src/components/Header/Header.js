@@ -11,7 +11,7 @@ export const Header = () =>{
             </div>
             <div className=" mb-3">
                 <input type="text" className={`${styles.searchInput}`} placeholder="Search" />
-                {/* <span><i class={`fa-solid fa-xmark ${styles.inputCross}`}></i></span> */}
+                    <i class={`fa-solid fa-circle-xmark ${styles.cross}`}></i>
             </div>
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
