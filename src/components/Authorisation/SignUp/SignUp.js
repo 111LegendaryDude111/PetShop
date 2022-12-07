@@ -5,9 +5,6 @@ export const SignUp = () => {
     async function signUpFunction(event){
         event.preventDefault();
         const target = event.target;
-        console.log([target[0].value,
-            target[1].value,
-            target[2].value]);
         const response = await fetch('https://api.react-learning.ru/signup ', {
             method: "POST",
             headers: {

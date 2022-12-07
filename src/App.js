@@ -1,16 +1,14 @@
 import './App.css';
-import { SignIn } from './Authorisation/SignIn';
-import { SignUp } from './Authorisation/SignUp/SignUp';
+import { Footer } from './components/Footer/Footer';
+import { Header } from './components/Header/Header';
+import { Main } from './components/Main/Main';
 
 function App() {
   return (
     <>
-    <header className='d-flex justify-content-center'>
-      <SignUp/>
-      <SignIn/>
-    </header>
-
-
+      <Header/>
+      <Main />
+      <Footer/>
     </>
   );
 };

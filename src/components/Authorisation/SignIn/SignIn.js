@@ -6,30 +6,40 @@ export const SignIn = () => {
 
 const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
+
+// if(localStorage.getItem(TOKEN_FOR_LS)){
+//     setEmailInput();
+//     setPasswordInput();
+// }
+
     async function signInFunction(e){
         e.preventDefault();
-        console.log(emailInput,passwordInput)
         const response = await fetch('https://api.react-learning.ru/signin',{
             method:"POST",
             headers:{
-                "Content-Type": "applicatin/json"
+                "Content-Type": "application/json"
             },
             body:JSON.stringify({
                 "email": emailInput,
                 "password": passwordInput
                 })
-                
         });
         let result = await response.json();
-        console.log(result);
+        console.log(result)
+        // localStorage.setItem(TOKEN_FOR_LS,JSON.stringify({
+        //     result.token,
+        //     res
+            
+        // });
     }
+
 
 
     return(
     <form onSubmit={signInFunction}>
         <div className="form-row">
             <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email</label>
+            <label htmlFor="inputEmail4">Email </label>
             <input type="email" className="form-control" id="inputEmail" placeholder="Email" 
             onChange={(e)=>{setEmailInput(e.currentTarget.value)}}
             value={emailInput}/>
