@@ -27,11 +27,11 @@ export const Footer = () => {
                 <p type="phone">8 (999) 999 99 99</p>
                 <p type="email">dogfood@gmail.com</p>
                 <div className={Style.footer_social}>
-                    <span className={Style.footer_social_margin}><i class="fa-brands fa-telegram"></i></span>
-                    <span className={Style.footer_social_margin}><i class="fa-brands fa-whatsapp"></i></span>
-                    <span className={Style.footer_social_margin}><i class="fa-brands fa-viber"></i></span>
-                    <span className={Style.footer_social_margin}><i class="fa-brands fa-instagram"></i></span>
-                    <span className={Style.vk}><i class="fa-brands fa-vk"></i></span>
+                    <span className={Style.footer_social_margin}><i className="fa-brands fa-telegram"></i></span>
+                    <span className={Style.footer_social_margin}><i className="fa-brands fa-whatsapp"></i></span>
+                    <span className={Style.footer_social_margin}><i className="fa-brands fa-viber"></i></span>
+                    <span className={Style.footer_social_margin}><i className="fa-brands fa-instagram"></i></span>
+                    <span className={Style.vk}><i className="fa-brands fa-vk"></i></span>
                 </div>
             </div>
         </footer>

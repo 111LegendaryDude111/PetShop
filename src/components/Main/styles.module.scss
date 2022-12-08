@@ -1,3 +1,63 @@
 .divCard{
     width: 18rem;
+    border:none;
+
+    &:hover{
+        border: 2px solid  #f9e100c7;
+    }
+}
+
+.containerForCards{
+    padding: 3rem;
+}
+
+.btnStyle{
+    background-color: #f9e100c7;
+    color: black;
+    border-radius: 2rem;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+}
+.price{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.cardImg{
+    padding: 1.5rem;
+
+}
+
+.heartStyleForFavourite{
+    position: absolute;
+    font-size: 2.3rem;
+    opacity: 0.4;
+    top: -0.1rem;
+    right: 0.3rem;
+    border: none;
+}
+
+.discountPrice{
+    background-color: red;
+    width: 4rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 0rem -0.8rem;
+    border:none
+}
+
+.newProduct{
+    background-color:#64a3ff;
+    color:azure;    
+    width: 6rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 0rem -0.8rem;
+    border:none;
+    font-weight: 600;
+    position: relative;
+    top: -1.5rem;
+    left: 4.2rem;
+    font-size: 1.1rem;
 }
