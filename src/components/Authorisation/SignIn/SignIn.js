@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import styles from './styles.module.scss';
 export const SignIn = () => {
     
 // значение инпутов через стейт
@@ -36,21 +36,23 @@ const [passwordInput,setPasswordInput] = useState('')
 
 
     return(
-    <form onSubmit={signInFunction}>
-        <div className="form-row">
-            <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4">Email </label>
-            <input type="email" className="form-control" id="inputEmail" placeholder="Email" 
-            onChange={(e)=>{setEmailInput(e.currentTarget.value)}}
-            value={emailInput}/>
+     <div className={`d-flex justify-content-center ${styles.signInPage}`}>       
+        <form onSubmit={signInFunction} className={styles.form}>
+            <div className="form-row">
+                <div className="form-group col-md-6">
+                <label htmlFor="inputEmail4">Email </label>
+                <input type="email" className="form-control" id="inputEmail" placeholder="Email" 
+                onChange={(e)=>{setEmailInput(e.currentTarget.value)}}
+                value={emailInput}/>
+                </div>
+                <div className="form-group col-md-6">
+                <label htmlFor="inputPassword">Password</label>
+                <input type="password" className="form-control" id="inputPassword" placeholder="password"
+                onChange={(e)=>{setPasswordInput(e.currentTarget.value)}}/>
+                </div>
             </div>
-            <div className="form-group col-md-6">
-            <label htmlFor="inputPassword">Password</label>
-            <input type="password" className="form-control" id="inputPassword" placeholder="password"
-            onChange={(e)=>{setPasswordInput(e.currentTarget.value)}}/>
-            </div>
-        </div>
-        <button type="submit" className="btn btn-primary">Sign in</button>
-    </form>
+            <button type="submit" className={`btn btn-primary ${styles.signInBtn}`}>Sign in</button>
+        </form>
+    </div>
         )
 }

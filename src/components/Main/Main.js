@@ -22,8 +22,8 @@ async function getProducts(){
 }
     return (
         <main>
-            <div className="container ">
-                <div className={`row justify-content-center ${styles.containerForCards}`}>
+            <div className={`container ${styles.containerPaddings}`}>
+                <div className="row justify-content-center">
             {
                 cards.map((el,i) => {
                     return(

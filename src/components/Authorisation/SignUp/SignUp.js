@@ -1,4 +1,4 @@
-
+import styles from './styles.module.scss'
 
 export const SignUp = () => {
 
@@ -24,7 +24,8 @@ export const SignUp = () => {
 
 
     return (
-        <form onSubmit={signUpFunction}>
+        <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
+        <form onSubmit={signUpFunction} className={styles.form}>
             <div className="form-row">
                 <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">Email</label>
@@ -39,7 +40,8 @@ export const SignUp = () => {
                 <label htmlFor="inputAddress">Description</label>
                 <input type="text" className="form-control" id="Description" placeholder="Your description"/>
             </div>
-            <button type="submit" className="btn btn-primary">Sign up</button>
+            <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}>Sign up</button>
             </form>
+        </div>
     )
 }

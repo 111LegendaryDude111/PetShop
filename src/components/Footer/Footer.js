@@ -8,7 +8,12 @@ export const Footer = () => {
         <footer className={Style.footer}>
             <div className={Style.footerDivFirstColumn}>
             <i className={`fa-solid fa-paw ${Style.footerLogo}`}></i>
-               Интернет-магазин DogFood
+            <br/>
+
+            <span>
+            <i className="fa-regular fa-copyright"></i>    
+            {' '}Интернет-магазин DogFood
+            </span> 
             </div>
             <div className={Style.secondColumn}>
                 <a>Каталог</a>
