@@ -1,16 +1,15 @@
 import { useState } from "react"
 import styles from './styles.module.scss';
+import {TOKEN_FOR_LS} from '../../assets';    
+import { useNavigate } from "react-router-dom";
 export const SignIn = () => {
-    
-// значение инпутов через стейт
+
+
 
 const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
+const navigate = useNavigate()
 
-// if(localStorage.getItem(TOKEN_FOR_LS)){
-//     setEmailInput();
-//     setPasswordInput();
-// }
 
     async function signInFunction(e){
         e.preventDefault();
@@ -26,11 +25,8 @@ const [passwordInput,setPasswordInput] = useState('')
         });
         let result = await response.json();
         console.log(result)
-        // localStorage.setItem(TOKEN_FOR_LS,JSON.stringify({
-        //     result.token,
-        //     res
-            
-        // });
+        localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
+        navigate(`/homepage/`)
     }
 
 
@@ -56,3 +52,6 @@ const [passwordInput,setPasswordInput] = useState('')
     </div>
         )
 }
+
+//Авторизация
+//Переход на главную страницу с продуктами

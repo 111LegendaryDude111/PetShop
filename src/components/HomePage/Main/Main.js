@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { tokenForFetch } from "../assets";
+import { tokenForFetch } from "../../assets";
 import styles from './styles.module.scss'
 
 export const Main = () => {
@@ -18,7 +18,6 @@ async function getProducts(){
     })
     let result = await response.json();
     setCards(result.products)
-    console.log(result.products)
 }
     return (
         <main>

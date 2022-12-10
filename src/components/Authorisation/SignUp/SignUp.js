@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss'
 
 export const SignUp = () => {
 
+    const navigate = useNavigate()
     async function signUpFunction(event){
         event.preventDefault();
         const target = event.target;
@@ -19,6 +21,7 @@ export const SignUp = () => {
         .then(resp => resp.json())
         .then(data => console.log(data))
         .catch(err => alert(err.status))        
+        navigate(`/authorization`)
     } 
 
 
