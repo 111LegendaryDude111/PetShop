@@ -7,8 +7,8 @@ import styles from './styles.module.scss'
 export const Header = () =>{
     const navigate = useNavigate();
     
-    function handler(){
-        navigate('/userProfile/')
+    function goToProfile(){
+        navigate('/userProfile/');
     }
 
 
@@ -25,7 +25,7 @@ export const Header = () =>{
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
                 <span><i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}></i></span>
-                <span onClick={handler} className={`${styles.UserProfile}`} >
+                <span onClick={goToProfile} className={`${styles.UserProfile}`} >
                     <i className={`fa-solid fa-user ${styles.fa_heart_style}`}></i>
                 </span>
             </div>
