@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from './styles.module.scss';
 import {TOKEN_FOR_LS} from '../../assets';    
 import { useNavigate } from "react-router-dom";
 export const SignIn = () => {
 
-
-
 const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
 const navigate = useNavigate()
 
-
+// useEffect(()=>{
+//     if (!localStorage.getItem(TOKEN_FOR_LS)){
+//     navigate('/')
+// }
+// },[])
     async function signInFunction(e){
         e.preventDefault();
         const response = await fetch('https://api.react-learning.ru/signin',{
@@ -25,8 +27,15 @@ const navigate = useNavigate()
         });
         let result = await response.json();
         console.log(result)
-        localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
-        navigate(`/homepage/`)
+        if(result.statusCode === 400){
+            alert('Пожалуйста,введите корректные данные')
+        }else{
+            localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
+            if(localStorage.getItem(TOKEN_FOR_LS)){
+                navigate(`/homepage/`)
+        }
+        }
+
     }
 
 

@@ -1,4 +1,5 @@
 import { useState, useEffect} from "react";
+import styles from './styles.module.scss'
 
 
 export const UserProfile = () => {
@@ -21,8 +22,8 @@ export const UserProfile = () => {
 }, []);
 
         return (
-        <div >
-            <img src={user.avatar} alt="UserPhoto"/>
+        <div className={styles.user_profile}>
+            <img src={user.avatar} alt="UserPhoto" className={styles.user_avatar}/>
             <h2>{user.name}</h2>
             <p> {user.about}</p>
             <p> {user.email} </p>

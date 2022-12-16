@@ -1,9 +1,18 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TOKEN_FOR_LS } from '../../assets';
 import styles from './styles.module.scss'
 
 export const SignUp = () => {
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem(TOKEN_FOR_LS)){
+            navigate(`/authorization`)
+        }
+    },[])
+    
     async function signUpFunction(event){
         event.preventDefault();
         const target = event.target;
@@ -20,11 +29,13 @@ export const SignUp = () => {
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
-        .catch(err => alert(err.status))        
+        .catch(err => alert(err.status))   
         navigate(`/authorization`)
     } 
 
-
+    function goToAutorization(){
+        navigate(`/authorization`)
+    }
 
     return (
         <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
@@ -44,6 +55,7 @@ export const SignUp = () => {
                 <input type="text" className="form-control" id="Description" placeholder="Your description"/>
             </div>
             <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}>Sign up</button>
+            <input type='button' className='btn btn-primary' onClick={goToAutorization} value='у меня уже есть аккаунт' />
             </form>
         </div>
     )

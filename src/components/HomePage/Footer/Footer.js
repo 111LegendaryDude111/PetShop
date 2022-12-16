@@ -29,8 +29,8 @@ export const Footer = () => {
             </div>
             <div className={Style.fourthColumn} >
                 <h3>Мы на связи</h3>
-                <p type="phone">8 (999) 999 99 99</p>
-                <p type="email">dogfood@gmail.com</p>
+                <p >8 (999) 999 99 99</p>
+                <p >dogfood@gmail.com</p>
                 <div className={Style.footer_social}>
                     <span className={Style.footer_social_margin}><i className="fa-brands fa-telegram"></i></span>
                     <span className={Style.footer_social_margin}><i className="fa-brands fa-whatsapp"></i></span>

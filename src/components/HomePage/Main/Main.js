@@ -26,7 +26,7 @@ async function getProducts(){
             {
                 cards.map((el,i) => {
                     return(
-                    <div key={i} className={`card col col-3 m-2 ${styles.divCard}`}>
+                    <div key={el._id} className={`card col col-3 m-2 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
                             {el.discount ? `-${el.discount}%` : ''}
                         </span>

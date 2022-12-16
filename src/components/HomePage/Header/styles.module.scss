@@ -7,14 +7,16 @@
 .rightAside{
     display: flex;
     justify-content: space-between;
-    padding: 15px;
-    margin-top: 37px;
+    padding: 0.7rem 1rem 0 0;
+    margin-top: 2.313rem;
 }
 
 .logoDiv{
     align-items: center;
     display: flex;
     flex-direction: column;
+    padding: 0 3rem;
+
 }
 
 .fa_heart_style {
@@ -41,6 +43,11 @@
     margin-left: -2.7rem;
     position: relative;
     opacity: 0.2;
+
+    &:hover{
+        opacity: 3;
+    }
+    
 }
 
 .btn{
@@ -52,7 +59,7 @@
     border: 1px solid black;
 }
 
-    .logo{
+.logo{
     font-size: 4rem;
 }
 
