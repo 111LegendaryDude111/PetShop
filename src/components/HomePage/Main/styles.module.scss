@@ -47,11 +47,13 @@
 
 .discountPrice{
     background-color: red;
+    color:white;
     width: 4rem;
     border-radius: 1rem;
     text-align: center;
     margin: 0rem -0.8rem;
-    border:none
+    border:none;
+    font-weight:bold;
 }
 
 .newProduct{
@@ -66,4 +68,24 @@
     position: absolute;
     left: 4.8rem;
     font-size: 1.1rem;
+}
+
+.weight{
+    margin: -1rem 0 0 0;
+}
+
+.productName{
+    margin: 0px 0 1.5rem 0;
+}
+
+.oldPrice{
+    text-decoration: line-through;
+    font-size: 0.8rem;
+    color:black;
+}
+
+.discPrice{
+    color:red;
+    font-weight:bold;
+    font-size: 1.3rem;
 }

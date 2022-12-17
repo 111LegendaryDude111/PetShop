@@ -18,6 +18,7 @@ async function getProducts(){
     })
     let result = await response.json();
     setCards(result.products)
+    console.log(result.products)
 }
     return (
         <main>
@@ -38,9 +39,16 @@ async function getProducts(){
                             <i className={`fa-regular fa-heart ${styles.heartStyleForFavourite}`}></i>
                         </span>
                         <div className="card-body">
-                            <p className={`card-text ${styles.price}`}>{el.price} <i className="fa-solid fa-ruble-sign"></i></p>
-                            <h5 className="card-title">{el.name}</h5>
-                            <p className="card-text">{el.wight} </p>
+                            <p className={`card-text ${el.discount ? styles.discPrice :styles.price}`}>
+                              <div className={styles.oldPrice}>
+                                 {el.discount ? el.price + 'P': ''}
+                           </div>
+                                {el.discount ? Math.round(el.price - (el.price * (el.discount /100)))
+                                :el.price} 
+                            <i className="fa-solid fa-ruble-sign"></i>
+                            </p>
+                            <p className={`card-text ${styles.weight}`}>{el.wight} </p>
+                            <h5 className={`card-title ${styles.productName}`}>{el.name}</h5>
                             <br/>
                             <button className={`btn btn-primary ${styles.btnStyle}`}>В корзину</button>
                         </div>
@@ -53,3 +61,6 @@ async function getProducts(){
         </main>
     )
 }
+
+
+
