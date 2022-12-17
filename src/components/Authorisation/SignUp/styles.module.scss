@@ -1,6 +1,10 @@
 .signUpPage{
     background-color: rgba(248, 248, 248, 0.845);
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .form{
@@ -8,6 +12,8 @@
     display: flex;
     flex-direction: column;
     width: 23rem;
+    margin: -4rem 0 1rem 8rem;
+
 }
 
 .signUpBtn{
