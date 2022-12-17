@@ -26,7 +26,7 @@ async function getProducts(){
             {
                 cards.map((el,i) => {
                     return(
-                    <div key={el._id} className={`card col col-3 m-2 ${styles.divCard}`}>
+                    <div key={el._id} className={`card col col-3 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
                             {el.discount ? `-${el.discount}%` : ''}
                         </span>
@@ -41,6 +41,7 @@ async function getProducts(){
                             <p className={`card-text ${styles.price}`}>{el.price} <i className="fa-solid fa-ruble-sign"></i></p>
                             <h5 className="card-title">{el.name}</h5>
                             <p className="card-text">{el.wight} </p>
+                            <br/>
                             <button className={`btn btn-primary ${styles.btnStyle}`}>В корзину</button>
                         </div>
                     </div>

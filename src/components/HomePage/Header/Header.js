@@ -11,10 +11,13 @@ export const Header = () =>{
         navigate('/userProfile/');
     }
 
+    function goToHomepage(){
+        navigate('/homepage')
+    }
 
     return(
         <header className={`${styles.header}`}>
-            <div className={styles.logoDiv}>
+            <div className={styles.logoDiv} onClick={goToHomepage}>
                 <i className={`fa-solid fa-paw ${styles.logo}`}></i>
                 <h1>DogFood</h1>
             </div>
@@ -25,7 +28,7 @@ export const Header = () =>{
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
                 <span><i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}></i></span>
-                <span onClick={goToProfile} className={`${styles.UserProfile}`} >
+                <span onClick={goToProfile}>
                     <i className={`fa-solid fa-user ${styles.fa_heart_style}`}></i>
                 </span>
             </div>

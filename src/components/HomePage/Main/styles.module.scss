@@ -1,9 +1,9 @@
 .divCard{
     width: 18rem;
     border:none;
-
+    margin: 0.7rem;
     &:hover{
-        border: 2px solid  #f9e100c7;
+        border: 0.1rem solid #f9e100c7;
     }
 }
 
@@ -18,6 +18,9 @@
     font-size: 16px;
     font-weight: 700;
     border: none;
+    position: absolute;
+    bottom: 1rem;
+    left: 1.3rem;
 }
 .price{
     font-size: 1.3rem;
@@ -29,7 +32,8 @@
 
 .cardImg{
     padding: 1.5rem;
-
+    height: 14rem;
+    object-fit: contain     
 }
 
 .heartStyleForFavourite{
@@ -59,8 +63,7 @@
     margin: 0rem -0.8rem;
     border:none;
     font-weight: 600;
-    position: relative;
-    top: -1.5rem;
-    left: 4.2rem;
+    position: absolute;
+    left: 4.8rem;
     font-size: 1.1rem;
 }
