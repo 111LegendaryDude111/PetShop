@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styles from './styles.module.scss';
 import {TOKEN_FOR_LS} from '../../assets';    
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,7 @@ const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
 const navigate = useNavigate()
 
-// useEffect(()=>{
-//     if (!localStorage.getItem(TOKEN_FOR_LS)){
-//     navigate('/')
-// }
-// },[])
+
     async function signInFunction(e){
         e.preventDefault();
         const response = await fetch('https://api.react-learning.ru/signin',{
@@ -61,6 +57,3 @@ const navigate = useNavigate()
     </div>
         )
 }
-
-//Авторизация
-//Переход на главную страницу с продуктами
