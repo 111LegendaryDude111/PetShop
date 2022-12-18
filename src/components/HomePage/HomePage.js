@@ -3,13 +3,13 @@ import { Header } from "./Header/Header"
 import { Main } from "./Main/Main"
 
 
-export const HomePage = (user,setUser) => {
+export const HomePage = () => {
     
 
 
     return(
         <>
-        <Header  user={user} setUser={setUser} />
+        <Header />
         <Main />
         <Footer />
         </>

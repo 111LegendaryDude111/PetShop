@@ -4,7 +4,7 @@ import { SignUp } from './components/Authorisation/SignUp/SignUp';
 import { HomePage } from './components/HomePage/HomePage';
 
 function App() {
-
+ 
   return (
       <>
       <SignIn/>

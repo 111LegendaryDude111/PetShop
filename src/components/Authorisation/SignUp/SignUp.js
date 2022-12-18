@@ -9,7 +9,7 @@ export const SignUp = () => {
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_FOR_LS)){
-            navigate(`/authorization`)
+           navigate(`/authorization`)
         }
     },[])
     

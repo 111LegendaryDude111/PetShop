@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
-import { UserProfile } from '../../UserProfile/UserProfile';
 import styles from './styles.module.scss'
 
 

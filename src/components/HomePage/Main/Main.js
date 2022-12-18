@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { tokenForFetch } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
 
 export const Main = () => {
+    const navigate = useNavigate()
+    if(!tokenForFetch){
+    navigate('/')
+    }
 
 async function getProductsWithQuery(){
   return  await fetch('https://api.react-learning.ru/products',{
@@ -14,18 +19,20 @@ async function getProductsWithQuery(){
 }).then(resp => resp.json())  
 .catch(err => alert(err.message))  
 }
-
-const {data,isLoading} = useQuery(['products'], getProductsWithQuery)    
+const {data,isLoading,isError,error} = useQuery(['products'], getProductsWithQuery)    
 if(isLoading){
     return (<Loader />)
-}
+}else if(isError){
+    alert(error.message)
+}else{
+    console.log(data)
 
     return (
         <main>
             <div className={`container ${styles.containerPaddings}`}>
                 <div className="row justify-content-center">
             {
-                data.products.map((el) => {
+            data.products.map((el) => {
                     return(
                     <div key={el._id} className={`card col col-3 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
@@ -60,6 +67,7 @@ if(isLoading){
             </div>
         </main>
     )
+}
 }
 
 

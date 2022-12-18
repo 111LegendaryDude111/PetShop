@@ -12,25 +12,33 @@ const navigate = useNavigate()
 
 async function signInFunction(e){
         e.preventDefault();
-        const response = await fetch('https://api.react-learning.ru/signin',{
-            method:"POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify({
-                "email": emailInput,
-                "password": passwordInput
-                })
-        });
-        let result = await response.json();
-        if(result.statusCode === 400){
-            alert('Пожалуйста,введите корректные данные')
-        }else{
-            localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
-            if(localStorage.getItem(TOKEN_FOR_LS)){
-                navigate(`/homepage/`)
+        try{
+            const response = await fetch('https://api.react-learning.ru/signin',{
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body:JSON.stringify({
+                    "email": emailInput,
+                    "password": passwordInput
+                    })
+            });
+            let result = await response.json();
+            if(result.statusCode === 400){
+                alert('Пожалуйста,введите корректные данные')
+            }else{
+                localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
+                if(localStorage.getItem(TOKEN_FOR_LS)){
+                    navigate(`/homepage/`)
+            }
         }
-    }
+        }catch(err){
+            alert(err.message);
+        }
+      
+}
+function goToSignUp(){
+    navigate('/')
 }
     return(
      <div className={`d-flex justify-content-center ${styles.signInPage}`}>       
@@ -49,6 +57,7 @@ async function signInFunction(e){
                 </div>
             </div>
             <button type="submit" className={`btn btn-primary ${styles.signInBtn}`}>Sign in</button>
+            <input type='button' className='btn btn-primary' onClick={goToSignUp} value='создать аккаунт' />
         </form>
     </div>
         )
