@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { navigate, useNavigate } from "react-router-dom";
 import { tokenForFetch } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
