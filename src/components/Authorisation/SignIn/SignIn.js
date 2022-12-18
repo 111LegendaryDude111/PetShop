@@ -2,14 +2,15 @@ import { useState } from "react"
 import styles from './styles.module.scss';
 import {TOKEN_FOR_LS} from '../../assets';    
 import { useNavigate } from "react-router-dom";
+
+
 export const SignIn = () => {
 
 const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
 const navigate = useNavigate()
 
-
-    async function signInFunction(e){
+async function signInFunction(e){
         e.preventDefault();
         const response = await fetch('https://api.react-learning.ru/signin',{
             method:"POST",
@@ -22,7 +23,6 @@ const navigate = useNavigate()
                 })
         });
         let result = await response.json();
-        console.log(result)
         if(result.statusCode === 400){
             alert('Пожалуйста,введите корректные данные')
         }else{
@@ -30,12 +30,8 @@ const navigate = useNavigate()
             if(localStorage.getItem(TOKEN_FOR_LS)){
                 navigate(`/homepage/`)
         }
-        }
-
     }
-
-
-
+}
     return(
      <div className={`d-flex justify-content-center ${styles.signInPage}`}>       
         <form onSubmit={signInFunction} className={styles.form}>

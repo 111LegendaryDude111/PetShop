@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { navigate, useNavigate } from "react-router-dom";
 import { tokenForFetch } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
@@ -25,7 +26,7 @@ if(isLoading){
             <div className={`container ${styles.containerPaddings}`}>
                 <div className="row justify-content-center">
             {
-                data.products.map((el,i) => {
+                data.products.map((el) => {
                     return(
                     <div key={el._id} className={`card col col-3 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
