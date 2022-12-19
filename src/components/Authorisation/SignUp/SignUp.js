@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TOKEN_FOR_LS } from '../../assets';
 import styles from './styles.module.scss'
@@ -6,31 +7,51 @@ import styles from './styles.module.scss'
 export const SignUp = () => {
 
     const navigate = useNavigate()
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    
+    // const queryClient = useQueryClient()
+    // Попытка сделать через TanStackQuery с помощью хука useMutation
+    // const {data, isLoading} = useMutation(signUpFunc(email,password),{
+    //     onSuccess: data => {
+    //         console.log(data);
+    //         alert('Регистрация прошла успешно')
+    //         navigate(`/authorization`)
+    //       },
+    //       onError: () => {
+    //         alert("Произошла ошибка")
+    //       },
+    //       onSettled: () => {
+    //         queryClient.invalidateQueries('create');
+    //       }
+    // })
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_FOR_LS)){
-           navigate(`/authorization`)
+            navigate(`/authorization`)
         }
     },[])
     
-    async function signUpFunction(event){
-        event.preventDefault();
-        const target = event.target;
+    
+    async function signUpFunc (email,password) {
         const response = await fetch('https://api.react-learning.ru/signup ', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body:JSON.stringify( {
-                "email": "" + target[0].value,
+                "email": "" + email,
                 "group": "sm8",
-                "password": "" + target[1].value
+                "password": "" + password
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
-        .catch(err => alert(err.status))   
-        navigate(`/authorization`)
+        .then(data =>{
+            console.log(data)
+            alert('Регистрация прошла успешно')
+            navigate(`/authorization`)
+        } )
+        .catch(err => alert(err.message))   
     } 
 
     function goToAutorization(){
@@ -39,15 +60,24 @@ export const SignUp = () => {
 
     return (
         <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
-        <form onSubmit={signUpFunction} className={styles.form}>
+        <form onSubmit={(e)=> {
+            e.preventDefault();
+            signUpFunc()
+        }}
+        className={styles.form}>
             <div className="form-row">
                 <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">Email</label>
-                <input type="email" className="form-control" id="inputEmailSignUp" placeholder="Email" />
+                <input type="email" className="form-control" id="inputEmailSignUp" placeholder="Email" 
+                onChange={(e) => setEmail(e.currentTarget.value)}
+                value={email} />
                 </div>
                 <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Password</label>
-                <input type="password" className="form-control" id="inputPasswordSignUp" placeholder="Password"/>
+                <input type="password" className="form-control" id="inputPasswordSignUp" placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.currentTarget.value)}
+                />
                 </div>
             </div>
             <div className="form-group col-md-6">
