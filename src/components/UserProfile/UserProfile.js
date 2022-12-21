@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { tokenForFetch } from "../assets";
+import { tokenForFetch, TOKEN_FOR_LS } from "../assets";
 import { Loader } from "../Loader/Loader";
 import styles from './styles.module.scss'
 
@@ -13,7 +13,7 @@ async function getUserDataWithQuery(){
 return await fetch('https://api.react-learning.ru/v2/sm8/users/me',{
             method:"GET",
             headers: {
-                authorization: tokenForFetch
+                authorization: JSON.parse(localStorage.getItem(TOKEN_FOR_LS))
             }
         })
         .then(res => res.json())

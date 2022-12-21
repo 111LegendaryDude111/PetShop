@@ -1,31 +1,44 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { tokenForFetch } from "../../assets";
+import { TOKEN_FOR_LS } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
 
 export const Main = () => {
     const navigate = useNavigate()
-    if(!tokenForFetch){
-    navigate('/')
-    }
-
+    
+    useEffect(() => {
+        if(!localStorage.getItem('token')){
+            navigate('/')
+            }
+    },[])
+    
 async function getProductsWithQuery(){
-  return  await fetch('https://api.react-learning.ru/products',{
+     const response = await fetch('https://api.react-learning.ru/products',{
         method:'GET',
         headers:{
-            authorization: tokenForFetch
+            authorization: JSON.parse(localStorage.getItem(TOKEN_FOR_LS))
         }
-}).then(resp => resp.json())  
-.catch(err => alert(err.message))  
+})
+let result = await response.json()
+
+if(response.status === 400 || response.status === 401 ){
+    console.log(`error: ${result.message}`)
+}else if(response.status === 200){
+    return result
 }
-const {data,isLoading,isError,error} = useQuery(['products'], getProductsWithQuery)    
+}
+    const {data,isLoading,isError,error,isSuccess} = useQuery({
+        queryKey: ['products'], 
+        queryFn: getProductsWithQuery,
+    })    
 if(isLoading){
     return (<Loader />)
 }else if(isError){
-    alert(error.message)
-}else{
-    console.log(data)
+    console.log(`error: ${error.message}`)
+}else if(isSuccess){
+    console.log(`ето дата: ${data}`)
 
     return (
         <main>

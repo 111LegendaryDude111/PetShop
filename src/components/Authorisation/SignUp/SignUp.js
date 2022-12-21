@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TOKEN_FOR_LS } from '../../assets';
@@ -9,22 +9,7 @@ export const SignUp = () => {
     const navigate = useNavigate()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    
-    // const queryClient = useQueryClient()
-    // Попытка сделать через TanStackQuery с помощью хука useMutation
-    // const {data, isLoading} = useMutation(signUpFunc(email,password),{
-    //     onSuccess: data => {
-    //         console.log(data);
-    //         alert('Регистрация прошла успешно')
-    //         navigate(`/authorization`)
-    //       },
-    //       onError: () => {
-    //         alert("Произошла ошибка")
-    //       },
-    //       onSettled: () => {
-    //         queryClient.invalidateQueries('create');
-    //       }
-    // })
+    const [enabledSignUp, setEnabledSignUp] = useState(false)
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_FOR_LS)){
@@ -32,8 +17,22 @@ export const SignUp = () => {
         }
     },[])
     
+    // Попытка сделать через TanStackQuery с помощью хука useQuery
+    const {data,isSuccess, error} = useQuery({
+        queryKey:['signUpFunc'],
+        queryFn: signUpFunc,
+        enabled: enabledSignUp,
+        refetchOnMount: false,
+    })
+
+    if(error){
+        alert(`Error ${error.message}`)
+    }else if(isSuccess){
+        console.log(data);
+        navigate(`/authorization`)
+    }
     
-    async function signUpFunc (email,password) {
+    async function signUpFunc () {
         const response = await fetch('https://api.react-learning.ru/signup ', {
             method: "POST",
             headers: {
@@ -45,13 +44,9 @@ export const SignUp = () => {
                 "password": "" + password
             })
         })
-        .then(resp => resp.json())
-        .then(data =>{
-            console.log(data)
-            alert('Регистрация прошла успешно')
-            navigate(`/authorization`)
-        } )
-        .catch(err => alert(err.message))   
+        let result = await response.json();
+        console.log({email},{password})
+        return result
     } 
 
     function goToAutorization(){
@@ -84,7 +79,8 @@ export const SignUp = () => {
                 <label htmlFor="inputAddress">Description</label>
                 <input type="text" className="form-control" id="Description" placeholder="Your description"/>
             </div>
-            <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}>Sign up</button>
+            <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}
+            onClick={() => setEnabledSignUp(prev => !prev)}>Sign up</button>
             <input type='button' className='btn btn-primary' onClick={goToAutorization} value='у меня уже есть аккаунт' />
             </form>
         </div>
