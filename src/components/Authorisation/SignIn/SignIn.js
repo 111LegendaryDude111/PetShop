@@ -30,12 +30,17 @@ async function signInFunction(){
             console.log({result}, {response})
             if(response.status === 400 || response.status === 401 ){
                 console.log(`Введите корректные данные.Ошибка: ${result.message}`)
+                throw Error(result.message);
             }else if(response.status === 200){
+                // localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(result.token))
+                if(localStorage.getItem(TOKEN_FOR_LS)){
+                    navigate(`/homepage`)
+            }
                 return result
             }
 }
     const {data,isSuccess, error} = useQuery({
-        queryKey:['signUpFunc'],
+        queryKey:['signInFunc'],
         queryFn: signInFunction,
         enabled: enabled,
         retry: false,
@@ -48,9 +53,8 @@ if(error){
 }else if(isSuccess){
     console.log("eto success",{data})
     localStorage.setItem(TOKEN_FOR_LS,JSON.stringify(data.token))
-        if(localStorage.getItem(TOKEN_FOR_LS)){
-            navigate(`/homepage`)
-    }
+    navigate(`/homepage`)
+    
 }
 
 // обычный запрос

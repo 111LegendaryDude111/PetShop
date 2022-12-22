@@ -19,6 +19,7 @@ export const SignUp = () => {
     
     // Попытка сделать через TanStackQuery с помощью хука useQuery
     async function signUpFunc () {
+        setEnabledSignUp(false);
         const response = await fetch('https://api.react-learning.ru/signup', {
             method: "POST",
             headers: {
@@ -32,9 +33,12 @@ export const SignUp = () => {
         })
         let result = await response.json();
         console.log({emailSignUp},{passwordSignUp})
+        console.log({result}, {response})
         if(response.status === 400 || response.status === 409 ){
             console.log(`Введите корректные данные.Ошибка: ${result.message}`)
-        }else if(response.status === 200){
+            throw Error(result.message);
+        }else if(response.status === 201){
+            console.log("респонс 200")
             return result
         }
     } 
@@ -43,8 +47,10 @@ export const SignUp = () => {
         queryKey:['signUpFunc'],
         queryFn: signUpFunc,
         enabled: enabledSignUp,
-        refetchOnMount: false,
-        retry:false
+        retry: false,
+        refetchOnWindowFocus: false,
+        cacheTime: 0,
+        refetchOnMount: false
     })
 
     if(error){
@@ -64,6 +70,7 @@ export const SignUp = () => {
         <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
         <form onSubmit={(e)=> {
             e.preventDefault();
+           setEnabledSignUp(true)
         }}
         className={styles.form}>
             <div className="form-row">
@@ -85,8 +92,7 @@ export const SignUp = () => {
                 <label htmlFor="inputAddress">Description</label>
                 <input type="text" className="form-control" id="Description" placeholder="Your description"/>
             </div>
-            <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}
-            onClick={() => setEnabledSignUp(prev => !prev)}>Sign up</button>
+            <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}>Sign up</button>
             <input type='button' className='btn btn-primary' onClick={goToAutorization} value='у меня уже есть аккаунт' />
             </form>
         </div>
