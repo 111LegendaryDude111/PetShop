@@ -7,8 +7,8 @@ import styles from './styles.module.scss'
 export const SignUp = () => {
 
     const navigate = useNavigate()
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
+    const [emailSignUp,setEmailSignUp] = useState('')
+    const [passwordSignUp,setPasswordSignUp] = useState('')
     const [enabledSignUp, setEnabledSignUp] = useState(false)
 
     useEffect(() => {
@@ -18,36 +18,43 @@ export const SignUp = () => {
     },[])
     
     // Попытка сделать через TanStackQuery с помощью хука useQuery
-    const {data,isSuccess, error} = useQuery({
-        queryKey:['signUpFunc'],
-        queryFn: signUpFunc,
-        enabled: enabledSignUp,
-        refetchOnMount: false,
-    })
-
-    if(error){
-        alert(`Error ${error.message}`)
-    }else if(isSuccess){
-        console.log(data);
-        navigate(`/authorization`)
-    }
-    
     async function signUpFunc () {
-        const response = await fetch('https://api.react-learning.ru/signup ', {
+        const response = await fetch('https://api.react-learning.ru/signup', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body:JSON.stringify( {
-                "email": "" + email,
+                "email": "" + emailSignUp,
                 "group": "sm8",
-                "password": "" + password
+                "password": "" + passwordSignUp
             })
         })
         let result = await response.json();
-        console.log({email},{password})
-        return result
+        console.log({emailSignUp},{passwordSignUp})
+        if(response.status === 400 || response.status === 409 ){
+            console.log(`Введите корректные данные.Ошибка: ${result.message}`)
+        }else if(response.status === 200){
+            return result
+        }
     } 
+    
+    const {data,isSuccess, error} = useQuery({
+        queryKey:['signUpFunc'],
+        queryFn: signUpFunc,
+        enabled: enabledSignUp,
+        refetchOnMount: false,
+        retry:false
+    })
+
+    if(error){
+        console.log(`Error ${error.message}`)
+    }else if(isSuccess){
+        console.log(data);
+        navigate(`/authorization`)
+    }
+    
+
 
     function goToAutorization(){
         navigate(`/authorization`)
@@ -57,21 +64,20 @@ export const SignUp = () => {
         <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
         <form onSubmit={(e)=> {
             e.preventDefault();
-            signUpFunc()
         }}
         className={styles.form}>
             <div className="form-row">
                 <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">Email</label>
                 <input type="email" className="form-control" id="inputEmailSignUp" placeholder="Email" 
-                onChange={(e) => setEmail(e.currentTarget.value)}
-                value={email} />
+                onChange={(e) => setEmailSignUp(e.currentTarget.value)}
+                value={emailSignUp} />
                 </div>
                 <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Password</label>
                 <input type="password" className="form-control" id="inputPasswordSignUp" placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.currentTarget.value)}
+                value={passwordSignUp}
+                onChange={(e) => setPasswordSignUp(e.currentTarget.value)}
                 />
                 </div>
             </div>
