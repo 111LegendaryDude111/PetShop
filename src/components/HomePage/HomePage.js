@@ -12,7 +12,7 @@ export const HomePage = () => {
     return(
         <>
         <Header setSearchValue={setSearchValue} searchValue={searchValue}/>
-        <Main searchValue={searchValue}/>
+        <Main searchValue={searchValue} setSearchValue={setSearchValue}/>
         <Footer />
         </>
     )

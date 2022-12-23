@@ -5,7 +5,7 @@ import { TOKEN_FOR_LS } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
 
-export const Main = ({searchValue}) => {
+export const Main = ({searchValue,setSearchValue}) => {
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -48,8 +48,21 @@ if(isLoading){
         <main>
             <div className={`container ${styles.containerPaddings}`}>
                 <div className="row justify-content-center">
-            {
-           filtredProducts.map((el) => {
+            {filtredProducts.length < 1 ? 
+           <div className={styles.searchResult}>
+                <div className={styles.leftSideSearchResult}>
+                    По запросу <span className={styles.searchValueText}>{searchValue}</span> найдено 0 товаров
+                </div>
+                <div className={styles.centerSide}>
+                    <i className={`fa-solid fa-face-sad-tear ${styles.sadSticker}`}></i>
+                    <p className={styles.searchResultText}>
+                        По вашему запросу товаров не найдено</p>
+                    <button className={`btn btn-primary ${styles.btnGoToHomepage}`}
+                    onClick={() => setSearchValue('')}
+                    > На главную</button>
+                </div>
+            </div> 
+            :filtredProducts.map((el) => {
                     return(
                     <div key={el._id} className={`card col col-3 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
@@ -74,7 +87,7 @@ if(isLoading){
                             <p className={`card-text ${styles.weight}`}>{el.wight} </p>
                             <h5 className={`card-title ${styles.productName}`}>{el.name}</h5>
                             <br/>
-                            <button className={`btn btn-primary ${styles.btnStyle}`}>В корзину</button>
+                            <button className={`btn ${styles.btnStyle}`}>В корзину</button>
                         </div>
                     </div>
                     )

@@ -21,6 +21,12 @@
     position: absolute;
     bottom: 1rem;
     left: 1.3rem;
+
+    &:hover{
+        transition: none;
+        border: 0.1rem solid black;
+        background-color: #f9e100c7;
+    }
 }
 .price{
     font-size: 1.3rem;
@@ -89,4 +95,45 @@
     color:red;
     font-weight:bold;
     font-size: 1.3rem;
+}
+
+
+// Товары не найдены
+.searchResult{
+    height: 22rem;
+    width: 100%;
+}
+
+.leftSideSearchResult{
+    font-size: 1.5rem;
+}
+.searchValueText{
+    font-weight: 800;
+}
+.centerSide{
+    margin-left:33rem ;
+}
+.btnGoToHomepage{
+    background-color: #f9e100c7;
+    color: black;
+    border-radius: 2rem;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    position: relative;
+    left: 10%;  
+}
+
+.sadSticker{
+    font-size: 8rem;
+    opacity: 50%;
+    position: relative;
+    left: 10%;
+    margin-bottom: 2rem;
+}
+
+.searchResultText{
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: -3rem;
 }
