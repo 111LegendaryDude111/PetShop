@@ -2,9 +2,8 @@ import {  useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss'
 
 
-export const Header = () =>{
+export const Header = ({setSearchValue,searchValue}) =>{
     const navigate = useNavigate();
-    
     function goToProfile(){
         navigate('/userProfile/');
     }
@@ -20,8 +19,13 @@ export const Header = () =>{
                 <h1>DogFood</h1>
             </div>
             <div className=" mb-3">
-                <input type="text" className={`${styles.searchInput}`} placeholder="Search" />
-                    <i className={`fa-solid fa-circle-xmark ${styles.cross}`}></i>
+                <input type="text" className={`${styles.searchInput}`} placeholder="Search"
+                onChange={(e) => setSearchValue(e.target.value)}
+                value={searchValue}
+                />
+                    <i className={`fa-solid fa-circle-xmark ${styles.cross}`}
+                    onClick={() => setSearchValue('')}
+                    ></i>
             </div>
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
@@ -32,4 +36,5 @@ export const Header = () =>{
             </div>
         </header>
     )
+    
 }

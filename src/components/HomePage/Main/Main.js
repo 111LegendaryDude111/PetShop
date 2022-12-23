@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { TOKEN_FOR_LS } from "../../assets";
 import { Loader } from "../../Loader/Loader";
 import styles from './styles.module.scss'
 
-export const Main = () => {
+export const Main = ({searchValue}) => {
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         if(!localStorage.getItem('token')){
             navigate('/')
@@ -38,14 +38,18 @@ if(isLoading){
 }else if(isError){
     console.log(`error: ${error.message}`)
 }else if(isSuccess){
-    console.log(`ето дата: ${data}`)
+    let products = data.products;
+    const filtredProducts =  products.filter((product) => {
+        return product.name.toLowerCase().includes(searchValue.toLowerCase())
+    })
 
+    console.log(filtredProducts)
     return (
         <main>
             <div className={`container ${styles.containerPaddings}`}>
                 <div className="row justify-content-center">
             {
-            data.products.map((el) => {
+           filtredProducts.map((el) => {
                     return(
                     <div key={el._id} className={`card col col-3 ${styles.divCard}`}>
                         <span className={styles.discountPrice}>
