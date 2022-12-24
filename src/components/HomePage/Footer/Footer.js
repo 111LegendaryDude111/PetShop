@@ -1,15 +1,34 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TOKEN_FOR_LS } from '../../assets';
 import Style from './Style.module.scss';
 
-export const Footer = () => {
+export const Footer = ({setFiltredProducts}) => {
 
+const navigate = useNavigate();
+useEffect(()=> stocksProductsFunc,[])
 
-
+async function stocksProductsFunc(){
+    const response = await fetch('https://api.react-learning.ru/products',{
+        method:'GET',
+        headers:{
+            authorization: JSON.parse(localStorage.getItem(TOKEN_FOR_LS))
+        }
+})
+let result = await response.json()
+    console.log(result)
+    if(response.status === 400 || response.status === 401 ){
+        console.log(`error: ${result.message}`)
+    }else if(response.status === 200){
+        setFiltredProducts(result.products.filter(prdct => prdct.discount > 0))
+        return result
+    }
+}
     return(
         <footer className={Style.footer}>
             <div className={Style.footerDivFirstColumn}>
             <i className={`fa-solid fa-paw ${Style.footerLogo}`}></i>
             <br/>
-
             <span>
             <i className="fa-regular fa-copyright"></i>    
             {' '}Интернет-магазин DogFood
@@ -17,7 +36,9 @@ export const Footer = () => {
             </div>
             <div className={Style.secondColumn}>
                 <a>Каталог</a>
-                <a>Акции</a>
+                <div href='#'
+                    onClick={() => navigate('/stocks')}
+                >Акции</div>
                 <a>Новости</a>
                 <a>Отзывы</a>
             </div>

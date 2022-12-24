@@ -39,7 +39,7 @@ if(isLoading){
     console.log(`error: ${error.message}`)
 }else if(isSuccess){
     let products = data.products;
-    const filtredProducts =  products.filter((product) => {
+    const filtredProducts = products.filter((product) => {
         return product.name.toLowerCase().includes(searchValue.toLowerCase())
     })
 
