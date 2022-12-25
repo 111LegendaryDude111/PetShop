@@ -6,13 +6,13 @@ import { Main } from "./Main/Main"
 
 export const HomePage = () => {
     
-    const [searchValue,setSearchValue]= useState('')
+    const [searchValue,setSearchValue] = useState('')
 
 
     return(
         <>
         <Header setSearchValue={setSearchValue} searchValue={searchValue}/>
-        <Main searchValue={searchValue} setSearchValue={setSearchValue}/>
+        <Main  setSearchValue={setSearchValue} searchValue={searchValue}/>
         <Footer />
         </>
     )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { TOKEN_FOR_LS } from "../../../assets";
+import { tokenForFetch, TOKEN_FOR_LS } from "../../../assets";
 import { Header } from "../../Header/Header"
 import { Footer } from "../Footer"
 import styles from './styles.module.scss'
@@ -14,19 +14,17 @@ const navigate = useNavigate()
         if(!localStorage.getItem('token')){
             navigate('/')
             }
-    stocksProductsFunc()
-
+        stocksProductsFunc()
     },[])
 async function stocksProductsFunc(){
 
     const response = await fetch('https://api.react-learning.ru/products',{
         method:'GET',
         headers:{
-            authorization: JSON.parse(localStorage.getItem(TOKEN_FOR_LS))
+            authorization: tokenForFetch
         }
 })
 let result = await response.json()
-    console.log(result)
     if(response.status === 400 || response.status === 401 ){
         console.log(`error: ${result.message}`)
     }else if(response.status === 200){

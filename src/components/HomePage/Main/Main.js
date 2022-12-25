@@ -1,49 +1,59 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { TOKEN_FOR_LS } from "../../assets";
+import { tokenForFetch } from "../../assets";
 import { Loader } from "../../Loader/Loader";
+import { Likes } from "./Likes/Likes";
 import styles from './styles.module.scss'
+import './likeAndUnlike.css'
+
 
 export const Main = ({searchValue,setSearchValue}) => {
-    const navigate = useNavigate()
 
+    const [userId,setUserId] = useState('');
+
+    const {data,isLoading,isError,error,isSuccess} = useQuery({
+        queryKey: ['products'], 
+        queryFn: getProductsWithQuery,
+    })    
+    const navigate = useNavigate()
     useEffect(() => {
         if(!localStorage.getItem('token')){
             navigate('/')
             }
+        fetch('https://api.react-learning.ru/v2/sm8/users/me',{
+            headers:{
+                authorization: tokenForFetch
+            }})
+            .then(resp => resp.json())
+            .then(user => setUserId(user._id))
+            .catch(err => console.log(`User Error ${err.message}}`))
     },[])
     
 async function getProductsWithQuery(){
      const response = await fetch('https://api.react-learning.ru/products',{
         method:'GET',
         headers:{
-            authorization: JSON.parse(localStorage.getItem(TOKEN_FOR_LS))
+            authorization: tokenForFetch
+        }})
+        let result = await response.json()
+
+        if(response.status === 400 || response.status === 401 ){
+            console.log(`error: ${result.message}`)
+        }else if(response.status === 200){
+            return result
         }
-})
-let result = await response.json()
+    }
 
-if(response.status === 400 || response.status === 401 ){
-    console.log(`error: ${result.message}`)
-}else if(response.status === 200){
-    return result
-}
-}
-    const {data,isLoading,isError,error,isSuccess} = useQuery({
-        queryKey: ['products'], 
-        queryFn: getProductsWithQuery,
-    })    
-if(isLoading){
-    return (<Loader />)
-}else if(isError){
-    console.log(`error: ${error.message}`)
-}else if(isSuccess){
-    let products = data.products;
-    const filtredProducts = products.filter((product) => {
-        return product.name.toLowerCase().includes(searchValue.toLowerCase())
-    })
-
-    console.log(filtredProducts)
+        if(isLoading){
+            return (<Loader />)
+        }else if(isError){
+            console.log(`error: ${error.message}`)
+        }else if(isSuccess){
+            let products = data.products;
+            const filtredProducts = products.filter((product) => {
+                return product.name.toLowerCase().includes(searchValue.toLowerCase())
+            })
     return (
         <main>
             <div className={`container ${styles.containerPaddings}`}>
@@ -73,8 +83,12 @@ if(isLoading){
                         </span>
                         <span className={styles.spanForImg}>
                             <img key={el.pictures} src={el.pictures} className={`card-img-top ${styles.cardImg}`} alt={el.name} />
-                            <i className={`fa-regular fa-heart ${styles.heartStyleForFavourite}`}></i>
-                        </span>
+                            </span>
+                            {/* <span className={el.likes.includes(userId) ? styles.like : ''}>
+                             */}
+                            <span className={el.likes.includes(userId) ? 'like' : ''}>
+                                <Likes id={el._id}/>
+                            </span>
                         <div className="card-body">
                             <div className={`card-text ${el.discount ? styles.discPrice :styles.price}`}>
                               <div className={styles.oldPrice}>
