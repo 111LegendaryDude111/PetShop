@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TOKEN_FOR_LS } from '../../assets';
 import Style from './Style.module.scss';
 
-export const Footer = ({setFiltredProducts}) => {
+export const Footer = () => {
 
 const navigate = useNavigate();
 useEffect(()=> stocksProductsFunc,[])
@@ -20,7 +20,6 @@ let result = await response.json()
     if(response.status === 400 || response.status === 401 ){
         console.log(`error: ${result.message}`)
     }else if(response.status === 200){
-        setFiltredProducts(result.products.filter(prdct => prdct.discount > 0))
         return result
     }
 }
@@ -35,18 +34,18 @@ let result = await response.json()
             </span> 
             </div>
             <div className={Style.secondColumn}>
-                <a>Каталог</a>
-                <div href='#'
+                <a href='#'>Каталог</a>
+                <a href='#'
                     onClick={() => navigate('/stocks')}
-                >Акции</div>
-                <a>Новости</a>
-                <a>Отзывы</a>
+                >Акции</a>
+                <a href='#'>Новости</a>
+                <a href='#'>Отзывы</a>
             </div>
             <div className={Style.thirdColumn}>
-                <a>Оплата и доставка</a>
-                <a>Часто спрашивают</a>
-                <a>Обратная связь</a>
-                <a>Контакты</a>
+                <a href='#'>Оплата и доставка</a>
+                <a href='#'>Часто спрашивают</a>
+                <a href='#'>Обратная связь</a>
+                <a href='#'>Контакты</a>
             </div>
             <div className={Style.fourthColumn} >
                 <h3>Мы на связи</h3>

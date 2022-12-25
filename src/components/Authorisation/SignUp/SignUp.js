@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TOKEN_FOR_LS } from '../../assets';
@@ -9,7 +9,6 @@ export const SignUp = () => {
     const navigate = useNavigate()
     const [emailSignUp,setEmailSignUp] = useState('')
     const [passwordSignUp,setPasswordSignUp] = useState('')
-    const [enabledSignUp, setEnabledSignUp] = useState(false)
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_FOR_LS)){
@@ -17,9 +16,7 @@ export const SignUp = () => {
         }
     },[])
     
-    // Попытка сделать через TanStackQuery с помощью хука useQuery
     async function signUpFunc () {
-        setEnabledSignUp(false);
         const response = await fetch('https://api.react-learning.ru/signup', {
             method: "POST",
             headers: {
@@ -43,25 +40,18 @@ export const SignUp = () => {
         }
     } 
     
-    const {data,isSuccess, error} = useQuery({
-        queryKey:['signUpFunc'],
-        queryFn: signUpFunc,
-        enabled: enabledSignUp,
-        retry: false,
-        refetchOnWindowFocus: false,
-        cacheTime: 0,
-        refetchOnMount: false
-    })
+    const mutation = useMutation({
+        mutationFn: signUpFunc
+    });
+    console.log(mutation)
 
-    if(error){
-        console.log(`Error ${error.message}`)
-    }else if(isSuccess){
-        console.log(data);
+    if(mutation.error){
+        console.log(`Error ${mutation.error.message}`)
+    }else if(mutation.isSuccess){
+        console.log(mutation.data);
         navigate(`/authorization`)
     }
     
-
-
     function goToAutorization(){
         navigate(`/authorization`)
     }
@@ -70,7 +60,7 @@ export const SignUp = () => {
         <div className={`d-flex justify-content-center ${styles.signUpPage}`}>
         <form onSubmit={(e)=> {
             e.preventDefault();
-           setEnabledSignUp(true)
+            mutation.mutate({email: emailSignUp, password: passwordSignUp})
         }}
         className={styles.form}>
             <div className="form-row">

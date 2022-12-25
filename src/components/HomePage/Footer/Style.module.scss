@@ -18,12 +18,28 @@ footer{
     display: flex;
     flex-direction: column;
     font-weight: 400;
+    
+    a {
+        color: black;
+        &:hover {
+            color:orange;
+            font-weight: bold;
+        }
+    }
 }
 
 .thirdColumn{
     display: flex;
     flex-direction: column;
     font-weight: 400;
+    a {
+        color: black;
+
+        &:hover {
+            color:orange;
+            font-weight: bold;
+        }
+    }
 }
 
 .fourthColumn{
