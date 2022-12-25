@@ -14,10 +14,10 @@ export const Header = ({setSearchValue,searchValue}) =>{
 
     return(
         <header className={`${styles.header}`}>
-            <div className={styles.logoDiv} onClick={goToHomepage}>
+            <a href='#' className={styles.logoDiv} onClick={goToHomepage}>
                 <i className={`fa-solid fa-paw ${styles.logo}`}></i>
                 <h1>DogFood</h1>
-            </div>
+            </a>
             <div className=" mb-3">
                 <input type="text" className={`${styles.searchInput}`} placeholder="Search"
                 onChange={(e) => setSearchValue(e.target.value)}

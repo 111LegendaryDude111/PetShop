@@ -16,7 +16,12 @@
     display: flex;
     flex-direction: column;
     padding: 0 3rem;
-
+    border:none;
+    color:black;
+    text-decoration: none;
+    &:hover{
+        color: orange;
+    }
 }
 
 .fa_heart_style {

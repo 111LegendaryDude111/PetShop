@@ -84,8 +84,6 @@ async function getProductsWithQuery(){
                         <span className={styles.spanForImg}>
                             <img key={el.pictures} src={el.pictures} className={`card-img-top ${styles.cardImg}`} alt={el.name} />
                             </span>
-                            {/* <span className={el.likes.includes(userId) ? styles.like : ''}>
-                             */}
                             <span className={el.likes.includes(userId) ? 'like' : ''}>
                                 <Likes id={el._id}/>
                             </span>
