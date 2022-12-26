@@ -45,6 +45,11 @@
     padding: 2rem;
     text-align: center; 
     border: none;
+
+    &:focus {
+        outline: 0;
+        outline-offset: 0;
+    }   
 }
 
 .cross{
