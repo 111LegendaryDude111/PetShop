@@ -12,7 +12,7 @@ export const SignUp = () => {
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_FOR_LS)){
-            navigate(`/authorization`)
+            goToAutorization()
         }
     },[])
     
@@ -49,7 +49,7 @@ export const SignUp = () => {
         console.log(`Error ${mutation.error.message}`)
     }else if(mutation.isSuccess){
         console.log(mutation.data);
-        navigate(`/authorization`)
+        goToAutorization()
     }
     
     function goToAutorization(){
@@ -83,7 +83,8 @@ export const SignUp = () => {
                 <input type="text" className="form-control" id="Description" placeholder="Your description"/>
             </div>
             <button type="submit" className={`btn btn-primary ${styles.signUpBtn}`}>Sign up</button>
-            <input type='button' className='btn btn-primary' onClick={goToAutorization} value='у меня уже есть аккаунт' />
+            <button type='button' className='btn btn-primary' onClick={goToAutorization}
+            >у меня уже есть аккаунт</button>
             </form>
         </div>
     )

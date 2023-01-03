@@ -5,9 +5,8 @@ import { Main } from "./Main/Main"
 
 
 export const HomePage = () => {
-    
     const [searchValue,setSearchValue] = useState('')
-
+    
 
     return(
         <>

@@ -6,11 +6,17 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from './styles.module.scss'
 import './likeAndUnlike.css'
+import { useDispatch, useSelector } from "react-redux";
+import { TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
 
 
 export const Main = ({searchValue,setSearchValue}) => {
 
     const [userId,setUserId] = useState('');
+    const token = useSelector(state => state.token)
+    const dispatch = useDispatch()
+    dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
+    console.log(token)    
 
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
@@ -29,7 +35,6 @@ export const Main = ({searchValue,setSearchValue}) => {
             .then(user => setUserId(user._id))
             .catch(err => console.log(`User Error ${err.message}}`))
     },[])
-    
 async function getProductsWithQuery(){
      const response = await fetch('https://api.react-learning.ru/products',{
         method:'GET',
@@ -44,7 +49,6 @@ async function getProductsWithQuery(){
             return result
         }
     }
-
         if(isLoading){
             return (<Loader />)
         }else if(isError){
