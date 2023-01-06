@@ -7,17 +7,14 @@ import { Likes } from "./Likes/Likes";
 import styles from './styles.module.scss'
 import './likeAndUnlike.css'
 import { useDispatch, useSelector } from "react-redux";
-import { TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
+import { PRODUCT_IN_BASKET, TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
 
 
 export const Main = ({searchValue,setSearchValue}) => {
 
     const [userId,setUserId] = useState('');
-    const token = useSelector(state => state.token)
     const dispatch = useDispatch()
     dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
-    console.log(token)    
-
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
         queryFn: getProductsWithQuery,
@@ -48,6 +45,10 @@ async function getProductsWithQuery(){
         }else if(response.status === 200){
             return result
         }
+    }
+    
+    function goToBasket(e){
+            dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id})
     }
         if(isLoading){
             return (<Loader />)
@@ -97,13 +98,15 @@ async function getProductsWithQuery(){
                                  {el.discount ? el.price + 'P': ''}
                            </div>
                                 {el.discount ? Math.round(el.price - (el.price * (el.discount /100)))
-                                :el.price} 
+                                :el.price} {" "}    
                             <i className="fa-solid fa-ruble-sign"></i>
                             </div>
                             <p className={`card-text ${styles.weight}`}>{el.wight} </p>
                             <h5 className={`card-title ${styles.productName}`}>{el.name}</h5>
                             <br/>
-                            <button className={`btn ${styles.btnStyle}`}>В корзину</button>
+                            <button id={el._id} className={`btn ${styles.btnStyle}`}
+                                onClick={goToBasket}
+                            >В корзину</button>
                         </div>
                     </div>
                     )

@@ -4,7 +4,6 @@ import styles from './styles.module.scss'
  export const Likes = ({id}) => {
 
     function clickLikesHandler(target){
-        console.dir(target.parentElement)
         target.parentElement.classList.toggle('like')               
         target.parentElement.className.includes('like') ? 
             fetch(`https://api.react-learning.ru/products/likes/${target.id}`,{
@@ -25,9 +24,8 @@ import styles from './styles.module.scss'
     }
 
     return(
-            <i id = {id} className={`fa-regular fa-heart 
-            ${styles.heartStyleForFavourite}`}
-                onClick={(e) =>{
+            <i id = {id} className={`fa-solid fa-heart ${styles.heartStyleForFavourite}`}
+                 onClick={(e) =>{
                     clickLikesHandler(e.target)
                 }}
             ></i>

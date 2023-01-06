@@ -4,12 +4,17 @@ import styles from './styles.module.scss'
 
 export const Header = ({setSearchValue,searchValue}) =>{
     const navigate = useNavigate();
+
     function goToProfile(){
-        navigate('/userProfile/');
+        navigate('/userProfile');
     }
 
     function goToHomepage(){
         navigate('/homepage')
+    }
+
+    function goToBasket(){
+        navigate('/basket')
     }
 
     return(
@@ -21,6 +26,7 @@ export const Header = ({setSearchValue,searchValue}) =>{
             <div className=" mb-3">
                 <input type="text" className={`${styles.searchInput}`} placeholder="Search"
                 onChange={(e) => setSearchValue(e.target.value)}
+                // onChange={(e) => console.dir(e.target.value)}
                 value={searchValue}
                 />
                     <i className={`fa-solid fa-circle-xmark ${styles.cross}`}
@@ -29,7 +35,11 @@ export const Header = ({setSearchValue,searchValue}) =>{
             </div>
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
-                <span><i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}></i></span>
+                <span
+                    onClick={goToBasket}
+                ><i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}
+                `}
+                ></i></span>
                 <span onClick={goToProfile}>
                     <i className={`fa-solid fa-user ${styles.fa_heart_style}`}></i>
                 </span>

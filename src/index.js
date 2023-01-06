@@ -11,6 +11,7 @@ import { Stocks } from './components/HomePage/Footer/Stocks/Stocks';
 import { createStore } from 'redux';
 import { reducer } from './Redux/Redux';
 import { Provider } from 'react-redux';
+import { Basket } from './components/Basket/Basket';
 
 const router = createBrowserRouter([
   {
@@ -26,13 +27,17 @@ const router = createBrowserRouter([
     element:<HomePage/>,
   },
   {
-    path: 'userProfile/',
-    element: <UserProfile/>
+   path: 'userProfile/',
+   element: <UserProfile/>
   },
   {
-    path: 'stocks/',
-    element: <Stocks/>
-  }
+   path: 'stocks/',
+   element: <Stocks/>
+  },
+  {
+   path: '/basket',
+   element: <Basket/>
+  },
 ]);
 
 const store = createStore(reducer)
