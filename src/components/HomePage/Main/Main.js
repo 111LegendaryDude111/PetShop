@@ -15,6 +15,9 @@ export const Main = ({searchValue,setSearchValue}) => {
     const [userId,setUserId] = useState('');
     const dispatch = useDispatch()
     dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
+
+
+
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
         queryFn: getProductsWithQuery,

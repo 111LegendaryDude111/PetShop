@@ -3,10 +3,11 @@ import { useEffect } from "react"
 export const TOKE_FOR_AUTHORIZATION = 'TOKE_FOR_AUTHORIZATION'
 export const PRODUCT_IN_BASKET = 'PRODUCT_IN_BASKET'
 
-
+const productsInTheBasketFromLS = JSON.parse(localStorage.getItem('basketProducts'))? JSON.parse(localStorage.getItem('basketProducts')):[];
+const tokenForReduxFromLS = JSON.parse(localStorage.getItem('token'))?JSON.parse(localStorage.getItem('token')):[]
 const defaultState = {
-    productsInTheBasket: [],
-    token: '',
+    productsInTheBasket: productsInTheBasketFromLS,
+    token: tokenForReduxFromLS,
 }
 
 export const reducer = (state = defaultState, action) => {

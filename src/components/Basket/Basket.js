@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { tokenForFetch } from "../assets"
-
+import styles from './styles.module.scss'
 
 export const Basket = () => {
     const productsInTheBasket = useSelector(store => store.productsInTheBasket)
     const [arrayForCards, setArrayForCards] = useState([]);
+    const navigate = useNavigate()
     useEffect(()=>{
         getProductsInTheBasket(productsInTheBasket)
+    },[productsInTheBasket])
+
+  
+    useEffect(()=>{
+        console.log(productsInTheBasket)
+        let basketProducts = JSON.stringify(productsInTheBasket)
+        localStorage.setItem('basketProducts',basketProducts )
     },[productsInTheBasket])
 
     async function getProductsInTheBasket(arrayWithProductsId){
@@ -27,7 +36,17 @@ export const Basket = () => {
     }   
 
     if (arrayForCards.length < 1){
-       return( <p> Basket is empty</p>)
+       return( 
+       <div className={styles.basketIsEmpty}>
+           <h3> Корзина пуста </h3>
+            <a href=" " onClick={()=> navigate('/homepage')}>
+                На главную
+            </a>
+            <a href=" "  onClick={()=> navigate('/userProfile')}>
+                Профиль
+            </a>
+       </div>
+       )
     }
     return(
 
@@ -54,6 +73,7 @@ export const Basket = () => {
                                         // onClick={(e) => addOneMoreProduct(e.target.parentNode.id)}
                                         ></i>
                                      </span>
+                                     <span>Товаров в наличии: {el.stock}</span>
                             </div>
                         )
                     })
