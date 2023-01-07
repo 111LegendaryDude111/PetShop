@@ -8,6 +8,7 @@ export const Basket = () => {
     const productsInTheBasket = useSelector(store => store.productsInTheBasket)
     const [arrayForCards, setArrayForCards] = useState([]);
     const navigate = useNavigate()
+
     useEffect(()=>{
         getProductsInTheBasket(productsInTheBasket)
     },[productsInTheBasket])
@@ -30,7 +31,6 @@ export const Basket = () => {
             }).then(resp => resp.json())
             .then(data => tempArray.push(data))
         }
-        console.log(tempArray)
         setArrayForCards(tempArray)
         return tempArray;
     }   
@@ -39,41 +39,46 @@ export const Basket = () => {
        return( 
        <div className={styles.basketIsEmpty}>
            <h3> Корзина пуста </h3>
-            <a href=" " onClick={()=> navigate('/homepage')}>
+            <button className={styles.btnBackToHome} onClick={()=> navigate('/homepage')}>
                 На главную
-            </a>
-            <a href=" "  onClick={()=> navigate('/userProfile')}>
+            </button>
+            <button className={styles.btnBackToHome} onClick={()=> navigate('/userProfile')}>
                 Профиль
-            </a>
+            </button>
        </div>
        )
     }
+
+
+
     return(
 
-        <div>
+        <div className={styles.basketStyle}>
             <h2>Список товаров:</h2>
-            <div className="">
+            <div >
                 {
-                    arrayForCards.map(el => {
+                    arrayForCards.map((el,i) => {
                         return(
-                            <div key={el._id}>
-                                <span>
-                                    <img src={el.pictures} style={{height: 5 + 'em'}} />
-                                </span>
-                                <span>
-                                    {el.name}
-                                </span>
-                                <span>{' ' + el.price }</span>
-                                <span id={el._id}>
-                                     Кол-во: 
-                                     <i className="fa-solid fa-minus"
-                                     ></i>                                    
-                                        {}
+                            <div key={el._id} className={styles.cardInBasket}>
+                                <div className="d-flex">
+                                    <span >
+                                        <img src={el.pictures} style={{height: 5 + 'em'}} />
+                                    </span>
+                                    <h4>
+                                        {el.name}
+                                    </h4>
+                                </div>
+                                <div className={styles.priceCount}>
+                                    <div>{' ' + el.price }</div>
+                                    <div key={i}>
+                                        Кол-во: 
+                                        <i className="fa-solid fa-minus"
+                                        ></i>                                    
                                         <i className="fa-solid fa-plus"
-                                        // onClick={(e) => addOneMoreProduct(e.target.parentNode.id)}
                                         ></i>
-                                     </span>
-                                     <span>Товаров в наличии: {el.stock}</span>
+                                        </div>
+                                        <div>Товаров в наличии: {el.stock}</div>
+                                </div>
                             </div>
                         )
                     })

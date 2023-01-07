@@ -16,7 +16,7 @@ const navigate = useNavigate();
             </div>
             <div className={Style.secondColumn}>
                 <a href='#'>Каталог</a>
-                <a href='#'
+                <a href=' '
                     onClick={() => navigate('/stocks')}
                 >Акции</a>
                 <a href='#'>Новости</a>

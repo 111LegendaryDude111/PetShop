@@ -20,7 +20,7 @@ export const Header = ({setSearchValue,searchValue}) =>{
 
     return(
         <header className={`${styles.header}`}>
-            <a href='#' className={styles.logoDiv} onClick={goToHomepage}>
+            <a href=' ' className={styles.logoDiv} onClick={goToHomepage}>
                 <i className={`fa-solid fa-paw ${styles.logo}`}></i>
                 <h1>DogFood</h1>
             </a>
