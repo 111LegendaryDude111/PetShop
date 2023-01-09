@@ -14,8 +14,7 @@ export const Main = ({searchValue,setSearchValue}) => {
 
     const [userId,setUserId] = useState('');
     const dispatch = useDispatch()
-    dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
-
+ 
 
 
     const {data,isLoading,isError,error,isSuccess} = useQuery({
@@ -24,18 +23,21 @@ export const Main = ({searchValue,setSearchValue}) => {
     })    
     const navigate = useNavigate()
     useEffect(() => {
+        
+        dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
+
         if(!localStorage.getItem('token')){
             navigate('/')
             }
-        fetch('https://api.react-learning.ru/v2/sm8/users/me',{
-            headers:{
-                authorization: tokenForFetch
-            }})
-            .then(resp => resp.json())
-            .then(user => setUserId(user._id))
-            .catch(err => console.log(`User Error ${err.message}}`))
+        // fetch('https://api.react-learning.ru/v2/sm8/users/me',{
+        //     headers:{
+        //         authorization: tokenForFetch
+        //     }})
+        //     .then(resp => resp.json())
+        //     .then(user => setUserId(user._id))
+        //     .catch(err => console.log(`User Error ${err}}`))
     },[])
-async function getProductsWithQuery(){
+    async function getProductsWithQuery(){
      const response = await fetch('https://api.react-learning.ru/products',{
         method:'GET',
         headers:{
@@ -50,7 +52,13 @@ async function getProductsWithQuery(){
         }
     }
     
+    // const updateBasket = (e) => {
+    //     dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id});
+    // }
+
+
     function goToBasket(e){
+            console.log('add')
             dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id})
     }
         if(isLoading){
@@ -108,7 +116,7 @@ async function getProductsWithQuery(){
                             <h5 className={`card-title ${styles.productName}`}>{el.name}</h5>
                             <br/>
                             <button id={el._id} className={`btn ${styles.btnStyle}`}
-                                onClick={goToBasket}
+                                onClick={(goToBasket)}
                             >В корзину</button>
                         </div>
                     </div>

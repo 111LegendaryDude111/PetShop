@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const store = createStore(reducer)
+const store = createStore(reducer);
 const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -23,6 +23,8 @@ useEffect(() =>{
     }
 } ,[])
 
+
+
 // запрос через TanStackQuery с помощью хука useQuery
 
 async function signInFunction(){
@@ -61,6 +63,10 @@ if(mutation.error){
     localStorage.setItem(TOKEN_FOR_LS, JSON.stringify(mutation.data.token))
     console.log(mutation.data)
     dispatch({type: TOKE_FOR_AUTHORIZATION, payload: mutation.data.token})
+ 
+
+
+
     navigate(`/homepage`)
     
 }

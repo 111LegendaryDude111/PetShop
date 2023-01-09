@@ -15,11 +15,11 @@ export const Basket = () => {
         getProductsInTheBasket(productsInTheBasket)
     },[productsInTheBasket])
   
-    useEffect(()=>{
-        console.log(productsInTheBasket)
-        let basketProducts = JSON.stringify(productsInTheBasket)
-        localStorage.setItem('basketProducts',basketProducts )
-    },[productsInTheBasket])
+    // useEffect(()=>{
+    //     console.log(productsInTheBasket)
+    //     let basketProducts = JSON.stringify(productsInTheBasket)
+    //     localStorage.setItem('basketProducts',basketProducts )
+    // },[productsInTheBasket])
 
     async function getProductsInTheBasket(arrayWithProductsId){
         let tempArray = [];

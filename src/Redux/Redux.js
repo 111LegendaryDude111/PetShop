@@ -14,10 +14,13 @@ export const reducer = (state = defaultState, action) => {
     switch(action.type){
             case TOKE_FOR_AUTHORIZATION: 
                 return {...state, token: action.payload}
+                
 
             case PRODUCT_IN_BASKET:
-                    let {productsInTheBasket} = state
-                    productsInTheBasket.push(action.payload)
+                    let {productsInTheBasket} = state;
+                    productsInTheBasket.push(action.payload);
+                    let basketProducts = JSON.stringify(productsInTheBasket)
+                    localStorage.setItem('basketProducts',basketProducts )
                 return {...state, productsInTheBasket}
         default:
             return state;

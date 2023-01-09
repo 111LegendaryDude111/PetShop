@@ -41,7 +41,7 @@
     margin-top: 2rem;
     position: relative;
     min-width: 0;
-    width: 37rem;
+    width: 80%;
     padding: 2rem;
     text-align: center; 
     border: none;
@@ -85,13 +85,17 @@
         right: 15rem;
      }
 }
-.basketCountOfProducts{
+.basketCountOfProductsContainer {
+    position: relative;
+
+&__Products{
     position: absolute;
-    right: 13rem;
-    top: 2rem;
+    right: 1rem;
+    top: -1rem;
     background-color: red;
     border-radius: 50%;
     width: 1.5rem;
     display: flex;
     justify-content: center;
  }
+}

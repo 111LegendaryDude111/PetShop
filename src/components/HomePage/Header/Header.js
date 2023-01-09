@@ -1,11 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useStore } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss'
 
 
 export const Header = ({setSearchValue,searchValue}) =>{
     const navigate = useNavigate();
-    const productsInTheBasket = useSelector(state => state.productsInTheBasket)
+    const store = useSelector(state => state);
+
+    useEffect(() => {
+       
+    }, [store])
+
     function goToProfile(){
         navigate('/userProfile');
     }
@@ -36,10 +42,11 @@ export const Header = ({setSearchValue,searchValue}) =>{
             <div className={styles.rightAside}>
                 <span><i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i></span>
                 <span
+                    className={styles.basketCountOfProductsContainer}
                     onClick={goToBasket}
                 >
-                <span className={styles.basketCountOfProducts}>
-                    <div >{productsInTheBasket.length > 0 ? productsInTheBasket.length : ''}</div></span>
+                <span className={styles.basketCountOfProductsContainer__Products}>
+                    <div >{store.productsInTheBasket.length > 0 ? store.productsInTheBasket.length : ''}</div></span>
                 <i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}></i>
                 </span>
                 <span onClick={goToProfile}>
