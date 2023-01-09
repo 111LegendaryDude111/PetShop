@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { tokenForFetch } from "../assets"
+import { ProductInBasket } from "./ProductInBasket/ProductInBasket"
 import styles from './styles.module.scss'
 
 export const Basket = () => {
@@ -9,10 +10,10 @@ export const Basket = () => {
     const [arrayForCards, setArrayForCards] = useState([]);
     const navigate = useNavigate()
 
+
     useEffect(()=>{
         getProductsInTheBasket(productsInTheBasket)
     },[productsInTheBasket])
-
   
     useEffect(()=>{
         console.log(productsInTheBasket)
@@ -49,8 +50,6 @@ export const Basket = () => {
        )
     }
 
-
-
     return(
 
         <div className={styles.basketStyle}>
@@ -59,27 +58,15 @@ export const Basket = () => {
                 {
                     arrayForCards.map((el,i) => {
                         return(
-                            <div key={el._id} className={styles.cardInBasket}>
-                                <div className="d-flex">
-                                    <span >
-                                        <img src={el.pictures} style={{height: 5 + 'em'}} />
-                                    </span>
-                                    <h4>
-                                        {el.name}
-                                    </h4>
-                                </div>
-                                <div className={styles.priceCount}>
-                                    <div>{' ' + el.price }</div>
-                                    <div key={i}>
-                                        Кол-во: 
-                                        <i className="fa-solid fa-minus"
-                                        ></i>                                    
-                                        <i className="fa-solid fa-plus"
-                                        ></i>
-                                        </div>
-                                        <div>Товаров в наличии: {el.stock}</div>
-                                </div>
-                            </div>
+                            <ProductInBasket
+                            key={i}
+                            id={el._id}
+                            img={el.pictures}
+                            name={el.name}
+                            price={el.price}
+                            index={i}
+                            stock={el.stock}
+                            />
                         )
                     })
                 }

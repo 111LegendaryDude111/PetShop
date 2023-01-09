@@ -1,0 +1,41 @@
+.cardInBasket{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 1rem 12rem 1rem 11rem;
+    padding: 1rem;
+}
+
+.priceCount{
+    margin-left: 6rem;
+    position: relative;
+    top: -2.6rem;
+    display: flex;
+    justify-content: space-between;
+    max-width: 34rem;
+}
+
+.counterOfProduct{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    border: 2px solid black;
+    border-radius: 17%;
+    width: 5rem;
+    background-color: blanchedalmond;
+    font-size: 1.2rem;
+    
+}
+
+.incrProd{
+    &:hover{
+        background-color:rgb(201, 198, 193)
+    }
+}
+
+.decrProd{
+
+    &:hover{
+        background-color:rgb(201, 198, 193)
+    }
+}
