@@ -55,7 +55,7 @@ export const Basket = () => {
 
         <div className={styles.basketStyle}>
             <h2>Список товаров:</h2>
-            <div >
+            <div>
                 {
                     arrayForCards.map((el,i) => {
                         return(

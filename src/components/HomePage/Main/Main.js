@@ -6,7 +6,7 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from './styles.module.scss'
 import './likeAndUnlike.css'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { PRODUCT_IN_BASKET, TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
 
 
@@ -56,9 +56,7 @@ export const Main = ({searchValue,setSearchValue}) => {
     //     dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id});
     // }
 
-
     function goToBasket(e){
-            console.log('add')
             dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id})
     }
         if(isLoading){

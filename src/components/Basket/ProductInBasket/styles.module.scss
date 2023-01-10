@@ -45,3 +45,10 @@
         background-color:rgb(201, 198, 193)
     }
 }
+
+.delete{
+    
+    &:hover{
+        color: red;
+    }
+}

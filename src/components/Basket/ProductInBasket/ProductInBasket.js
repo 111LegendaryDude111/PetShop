@@ -17,9 +17,10 @@ export const ProductInBasket = ({id,img,name,price,deleteProduct,stock}) =>{
             </h4>
         </div>
         <div className={styles.priceCount}>
-            <div>{' ' + price } р</div>
+            <div>{' ' + price === 1? price: price * count} р</div>
                 <div className={styles.counterOfProduct}>
                     <button className={`fa-solid fa-minus ${styles.decrProd}`} 
+                    disabled={count < 1  && true}
                     onClick={()=> setCount(prev=>prev - 1 )}></button>                                    
                      <span > {count}</span> 
                     <button className={`fa-solid fa-plus ${styles.incrProd}`} 
@@ -27,7 +28,7 @@ export const ProductInBasket = ({id,img,name,price,deleteProduct,stock}) =>{
                     onClick={()=> setCount(prev=>prev + 1 )}></button>
                 </div>
             <div>Товаров в наличии: {stock}</div>
-        <div><i className="fa-solid fa-trash"
+        <div><i className={`fa-solid fa-trash ${styles.delete}`}
         id={id}
         onClick={deleteProduct}
         ></i></div>
