@@ -14,8 +14,6 @@ export const Main = ({searchValue,setSearchValue}) => {
 
     const [userId,setUserId] = useState('');
     const dispatch = useDispatch()
- 
-
 
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
@@ -29,13 +27,15 @@ export const Main = ({searchValue,setSearchValue}) => {
         if(!localStorage.getItem('token')){
             navigate('/')
             }
-        // fetch('https://api.react-learning.ru/v2/sm8/users/me',{
-        //     headers:{
-        //         authorization: tokenForFetch
-        //     }})
-        //     .then(resp => resp.json())
-        //     .then(user => setUserId(user._id))
-        //     .catch(err => console.log(`User Error ${err}}`))
+
+        // Запрос для отображения лайков
+        fetch('https://api.react-learning.ru/v2/sm8/users/me',{
+            headers:{
+                authorization: tokenForFetch
+            }})
+            .then(resp => resp.json())
+            .then(user => setUserId(user._id))
+            .catch(err => console.log(`User Error ${err}}`))
     },[])
     async function getProductsWithQuery(){
      const response = await fetch('https://api.react-learning.ru/products',{
