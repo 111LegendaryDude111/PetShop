@@ -1,16 +1,13 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
 import styles from './styles.module.scss'
 
 
-export const ProductInBasket = ({id,img,name,price,index,stock}) =>{
-    const productsInTheBasket = useSelector(store => store.productsInTheBasket)
+export const ProductInBasket = ({id,img,name,price,deleteProduct,stock}) =>{
     const [count,setCount] = useState(1)
 
 
-
     return(                            
-    <div key={Date.now()} className={styles.cardInBasket}>
+    <div key={id} className={styles.cardInBasket}>
         <div className="d-flex mw-75%">
             <span >
                 <img src={img} style={{height: 5 + 'em'}} />
@@ -22,13 +19,18 @@ export const ProductInBasket = ({id,img,name,price,index,stock}) =>{
         <div className={styles.priceCount}>
             <div>{' ' + price } р</div>
                 <div className={styles.counterOfProduct}>
-                    <i className={`fa-solid fa-minus ${styles.decrProd}`} 
-                    onClick={()=> setCount(prev=>prev - 1 )}></i>                                    
+                    <button className={`fa-solid fa-minus ${styles.decrProd}`} 
+                    onClick={()=> setCount(prev=>prev - 1 )}></button>                                    
                      <span > {count}</span> 
-                    <i className={`fa-solid fa-plus ${styles.incrProd}`} 
-                    onClick={()=> setCount(prev=>prev + 1 )}></i>
+                    <button className={`fa-solid fa-plus ${styles.incrProd}`} 
+                    disabled={count === stock && true}
+                    onClick={()=> setCount(prev=>prev + 1 )}></button>
                 </div>
             <div>Товаров в наличии: {stock}</div>
+        <div><i className="fa-solid fa-trash"
+        id={id}
+        onClick={deleteProduct}
+        ></i></div>
         </div>
     </div>)
 }
