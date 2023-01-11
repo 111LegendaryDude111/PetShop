@@ -11,12 +11,15 @@ import { addProductsInBasket, addTokenRedux} from "../../../Redux/slices/slices"
 
 
 export const Main = ({searchValue,setSearchValue}) => {
-
+    const store = useSelector(store => store)
+    console.log(store.token)
     const [userId,setUserId] = useState('');
     const dispatch = useDispatch()
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
         queryFn: getProductsWithQuery,
+        retry:true,
+        enabled:true,
     })    
     const navigate = useNavigate()
     useEffect(() => {
@@ -24,11 +27,11 @@ export const Main = ({searchValue,setSearchValue}) => {
             navigate('/')
             }
         dispatch(addTokenRedux(tokenForFetch))
-
         // Запрос для отображения лайков
         fetch('https://api.react-learning.ru/v2/sm8/users/me',{
             headers:{
-                authorization: tokenForFetch
+                // authorization: tokenForFetch
+                authorization:store.token.token
             }})
             .then(resp => resp.json())
             .then(user => setUserId(user._id))
@@ -59,9 +62,7 @@ export const Main = ({searchValue,setSearchValue}) => {
             console.log(`error: ${error.message}`)
         }else if(isSuccess){
             let products = data.products;
-            const filtredProducts = products.filter((product) => {
-                return product.name.toLowerCase().includes(searchValue.toLowerCase())
-            })
+ const filtredProducts = products.filter((product) =>  product.name.toLowerCase().includes(searchValue.toLowerCase()))
     return (
         <main>
             <div className={`container ${styles.containerPaddings}`}>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-// import { DELETE_PRODUCTS_IN_BASKET } from "../../Redux/Redux"
 import { deleteProductsInBasket } from "../../Redux/slices/slices"
 import { tokenForFetch } from "../assets"
 import { ProductInBasket } from "./ProductInBasket/ProductInBasket"
@@ -12,13 +11,33 @@ export const Basket = () => {
     const [arrayForCards, setArrayForCards] = useState([]);
     const navigate = useNavigate()
     const dispatch = useDispatch()
+//     const {isError,isLoading,isSuccess,data} = useQuery(
+//         {
+//         queryKey: ['productsInBasket'],
+//         queryFn: basketFuncWithQuery()
+//     }
+// )
 
+// async function basketFuncWithQuery(){
+//     let temp = productsInTheBasket.map(async (el) => {
+//       return   fetch(`https://api.react-learning.ru/products/${el}`,{
+//                     method: 'GET',
+//                     headers:{
+//                         authorization: tokenForFetch
+//                     }
+//             }).then(resp => resp.json())
+//             .then(data => data)
+//             .catch(err => console.log(err.message))
+//         })
+//         console.log(typeof Promise.all(temp).then(reslt=> reslt))
+
+//            return Promise.all(temp).then(reslt=> reslt)
+//     }   
+
+// })
     useEffect(()=>{
-        getProductsInTheBasket(productsInTheBasket)
+        console.log(getProductsInTheBasket(productsInTheBasket))
     },[productsInTheBasket])
-    // useEffect(()=>{
-    //     console.log(store)
-    // },[store])
 
     async function getProductsInTheBasket(arrayWithProductsId){
         let tempArray = [];
@@ -37,26 +56,23 @@ export const Basket = () => {
 
     function deleteProduct(e){
         let target = e.target;
-        // dispatch({type: DELETE_PRODUCTS_IN_BASKET, payload: target.id})
         dispatch(deleteProductsInBasket(target.id))
     }
 
-    if (arrayForCards.length < 1){
-       return( 
-       <div className={styles.basketIsEmpty}>
-           <h3> Корзина пуста </h3>
-            <button className={styles.btnBackToHome} onClick={()=> navigate('/homepage')}>
-                На главную
-            </button>
-            <button className={styles.btnBackToHome} onClick={()=> navigate('/userProfile')}>
-                Профиль
-            </button>
-       </div>
-       )
-    }
-
+        if (arrayForCards.length < 1){
+            return( 
+            <div className={styles.basketIsEmpty}>
+                <h3> Корзина пуста </h3>
+                 <button className={styles.btnBackToHome} onClick={()=> navigate('/homepage')}>
+                     На главную
+                 </button>
+                 <button className={styles.btnBackToHome} onClick={()=> navigate('/userProfile')}>
+                     Профиль
+                 </button>
+            </div>
+            )
+         }
     return(
-
         <div className={styles.basketStyle}>
             <h2>Список товаров:</h2>
             <div>

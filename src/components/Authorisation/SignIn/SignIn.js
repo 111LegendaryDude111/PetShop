@@ -3,9 +3,9 @@ import styles from './styles.module.scss';
 import { TOKEN_FOR_LS} from '../../assets';    
 import { useNavigate } from "react-router-dom";
 import { useMutation} from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../Loader/Loader";
-import { tokenReducer } from "../../../Redux/slices/slices";
+import { addTokenRedux, tokenReducer } from "../../../Redux/slices/slices";
 
 
 export const SignIn = () => {
@@ -19,8 +19,6 @@ useEffect(() =>{
         navigate('/homepage')
     }
 } ,[])
-
-
 
 // запрос через TanStackQuery с помощью хука useQuery
 
@@ -53,9 +51,8 @@ if(mutation.error){
     return <Loader/>
 }else if(mutation.isSuccess){
     localStorage.setItem(TOKEN_FOR_LS, JSON.stringify(mutation.data.token))
-    dispatch(tokenReducer(mutation.data.token))
+    dispatch(addTokenRedux(mutation.data.token))
     navigate(`/homepage`)
-    
 }
 function goToSignUp(){
     navigate('/')
