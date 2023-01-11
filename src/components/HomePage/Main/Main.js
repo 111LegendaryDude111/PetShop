@@ -6,27 +6,24 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from './styles.module.scss'
 import './likeAndUnlike.css'
-import { useDispatch } from "react-redux";
-import { PRODUCT_IN_BASKET, TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductsInBasket, addTokenRedux} from "../../../Redux/slices/slices";
 
 
 export const Main = ({searchValue,setSearchValue}) => {
 
     const [userId,setUserId] = useState('');
     const dispatch = useDispatch()
-
     const {data,isLoading,isError,error,isSuccess} = useQuery({
         queryKey: ['products'], 
         queryFn: getProductsWithQuery,
     })    
     const navigate = useNavigate()
     useEffect(() => {
-        
-        dispatch({type: TOKE_FOR_AUTHORIZATION, payload: tokenForFetch})
-
         if(!localStorage.getItem('token')){
             navigate('/')
             }
+        dispatch(addTokenRedux(tokenForFetch))
 
         // Запрос для отображения лайков
         fetch('https://api.react-learning.ru/v2/sm8/users/me',{
@@ -51,13 +48,10 @@ export const Main = ({searchValue,setSearchValue}) => {
             return result
         }
     }
-    
-    // const updateBasket = (e) => {
-    //     dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id});
-    // }
 
     function goToBasket(e){
-            dispatch({type: PRODUCT_IN_BASKET, payload:e.target.id})
+        const target = e.target;
+            dispatch(addProductsInBasket(target.id))
     }
         if(isLoading){
             return (<Loader />)

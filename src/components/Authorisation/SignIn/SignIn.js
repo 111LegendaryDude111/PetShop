@@ -4,14 +4,11 @@ import { TOKEN_FOR_LS} from '../../assets';
 import { useNavigate } from "react-router-dom";
 import { useMutation} from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import { TOKE_FOR_AUTHORIZATION } from "../../../Redux/Redux";
 import { Loader } from "../../Loader/Loader";
+import { tokenReducer } from "../../../Redux/slices/slices";
 
 
 export const SignIn = () => {
-
-
-
 const [emailInput,setEmailInput] = useState('')
 const [passwordInput,setPasswordInput] = useState('')
 const navigate = useNavigate()
@@ -44,29 +41,19 @@ async function signInFunction(){
                 console.log(`Введите корректные данные.Ошибка: ${result.message}`)
                 throw Error(result.message);
             }else if(response.status === 200){
-            //     if(localStorage.getItem(TOKEN_FOR_LS)){
-            //         navigate(`/homepage`)
-            // }
                 return result
             }
 }
     const mutation = useMutation({
         mutationFn: signInFunction
     });
-// console.log(mutation)
 if(mutation.error){
     console.log(mutation.error.message)
 }else if(mutation.isLoading){
     return <Loader/>
 }else if(mutation.isSuccess){
-    console.log("eto success",mutation.data)
     localStorage.setItem(TOKEN_FOR_LS, JSON.stringify(mutation.data.token))
-    console.log(mutation.data)
-    dispatch({type: TOKE_FOR_AUTHORIZATION, payload: mutation.data.token})
- 
-
-
-
+    dispatch(tokenReducer(mutation.data.token))
     navigate(`/homepage`)
     
 }

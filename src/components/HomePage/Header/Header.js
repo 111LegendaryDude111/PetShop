@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss'
 
@@ -7,7 +7,6 @@ import styles from './styles.module.scss'
 export const Header = ({setSearchValue,searchValue}) =>{
     const navigate = useNavigate();
     const store = useSelector(state => state);
-
     useEffect(() => {
        
     }, [store])
@@ -46,7 +45,8 @@ export const Header = ({setSearchValue,searchValue}) =>{
                     onClick={goToBasket}
                 >
                 <span className={styles.basketCountOfProductsContainer__Products}>
-                    <div >{store.productsInTheBasket.length > 0 ? store.productsInTheBasket.length : ''}</div></span>
+                    <div >{store.basket.length > 0 ? store.basket.length : ''}</div>
+                    </span>
                 <i className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}></i>
                 </span>
                 <span onClick={goToProfile}>

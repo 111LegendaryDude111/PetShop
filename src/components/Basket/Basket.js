@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { DELETE_PRODUCTS_IN_BASKET } from "../../Redux/Redux"
+// import { DELETE_PRODUCTS_IN_BASKET } from "../../Redux/Redux"
+import { deleteProductsInBasket } from "../../Redux/slices/slices"
 import { tokenForFetch } from "../assets"
 import { ProductInBasket } from "./ProductInBasket/ProductInBasket"
 import styles from './styles.module.scss'
 
 export const Basket = () => {
-    const productsInTheBasket = useSelector(store => store.productsInTheBasket)
+    const productsInTheBasket = useSelector(store => store.basket)
     const [arrayForCards, setArrayForCards] = useState([]);
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -15,7 +16,9 @@ export const Basket = () => {
     useEffect(()=>{
         getProductsInTheBasket(productsInTheBasket)
     },[productsInTheBasket])
-  
+    // useEffect(()=>{
+    //     console.log(store)
+    // },[store])
 
     async function getProductsInTheBasket(arrayWithProductsId){
         let tempArray = [];
@@ -34,7 +37,8 @@ export const Basket = () => {
 
     function deleteProduct(e){
         let target = e.target;
-        dispatch({type: DELETE_PRODUCTS_IN_BASKET, payload: target.id})
+        // dispatch({type: DELETE_PRODUCTS_IN_BASKET, payload: target.id})
+        dispatch(deleteProductsInBasket(target.id))
     }
 
     if (arrayForCards.length < 1){
