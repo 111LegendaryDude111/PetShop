@@ -1,31 +1,29 @@
-.basketIsEmpty{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+.basketIsEmpty {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-.btnBackToHome{
-    display: flex;
-    justify-content: center;
-    margin: 0.2rem;
-    flex-direction: row;
-    background-color: rgba(249, 225, 0, 0.7803921569);
-    color: black;
-    border-radius: 2rem;
-    font-size: 16px;
-    font-weight: 700;
-    border: none; 
+.btnBackToHome {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem;
+  flex-direction: row;
+  background-color: rgba(249, 225, 0, 0.7803921569);
+  color: black;
+  border-radius: 2rem;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
 }
-
-
 
 //Товары есть в корзине
 
-.basketStyle{
-    background-color: rgb(211 208 208);
-    // background-color: rgba(249, 225, 0, 0.7803921569);
-    // height: 100%;
+.basketStyle {
+  background-color: rgb(211 208 208);
+  // background-color: rgba(249, 225, 0, 0.7803921569);
+  // height: 100%;
   position: absolute;
   top: 0px;
   right: 0px;

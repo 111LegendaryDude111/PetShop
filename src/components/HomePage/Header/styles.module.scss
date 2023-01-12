@@ -1,94 +1,93 @@
-.header{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: rgb(250, 217, 0);
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(250, 217, 0);
 }
 
-.rightAside{
-    display: flex;
-    justify-content: space-between;
-    padding: 0.7rem 1rem 0 0;
-    margin-top: 2.313rem;
+.rightAside {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 1rem 0 0;
+  margin-top: 2.313rem;
 }
 
-.logoDiv{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 0 3rem;
-    border:none;
-    color:black;
-    text-decoration: none;
-    &:hover{
-        color: orange;
-    }
+.logoDiv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3rem;
+  border: none;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    color: orange;
+  }
 }
 
 .fa_heart_style {
-    content: "\f004";
-    margin-right: 1.5rem;
-    font-size: 2rem;
+  content: "\f004";
+  margin-right: 1.5rem;
+  font-size: 2rem;
 
-    &:hover{
-        color: chocolate;
-        font-size: 2.2rem;
-    }
+  &:hover {
+    color: chocolate;
+    font-size: 2.2rem;
+  }
 }
-.searchInput{
-    font-size: 2rem;
-    height: 4rem;
-    border-radius: 30px;
-    margin-top: 2rem;
-    position: relative;
-    min-width: 0;
-    width: 80%;
-    padding: 2rem;
-    text-align: center; 
-    border: none;
+.searchInput {
+  font-size: 2rem;
+  height: 4rem;
+  border-radius: 30px;
+  margin-top: 2rem;
+  position: relative;
+  min-width: 0;
+  width: 80%;
+  padding: 2rem;
+  text-align: center;
+  border: none;
 
-    &:focus {
-        outline: 0;
-        outline-offset: 0;
-    }   
-}
-
-.cross{
-    content: "\f004";
-    font-size: 2rem;
-    margin-left: -2.7rem;
-    position: relative;
-    opacity: 0.2;
-
-    &:hover{
-        opacity: 3;
-    }
-    
+  &:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
 }
 
-.btn{
-    font-size: 30px;
-    border-radius: 30px;
-    height: 60px;
-    width: 150px;
-    margin-top: 20px;
-    border: 1px solid black;
+.cross {
+  content: "\f004";
+  font-size: 2rem;
+  margin-left: -2.7rem;
+  position: relative;
+  opacity: 0.2;
+
+  &:hover {
+    opacity: 3;
+  }
 }
 
-.logo{
-    font-size: 4rem;
+.btn {
+  font-size: 30px;
+  border-radius: 30px;
+  height: 60px;
+  width: 150px;
+  margin-top: 20px;
+  border: 1px solid black;
 }
 
-.UserProfile{
-     &:hover{
-        position: absolute;
-        top: 46px;
-        right: 15rem;
-     }
+.logo {
+  font-size: 4rem;
+}
+
+.UserProfile {
+  &:hover {
+    position: absolute;
+    top: 46px;
+    right: 15rem;
+  }
 }
 .basketCountOfProductsContainer {
-    position: relative;
+  position: relative;
 
-&__Products{
+  &__Products {
     position: absolute;
     right: 1rem;
     top: -1rem;
@@ -97,5 +96,5 @@
     width: 1.5rem;
     display: flex;
     justify-content: center;
- }
+  }
 }

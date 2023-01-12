@@ -1,21 +1,21 @@
-.signInPage{
-    background-color: rgba(248, 248, 248, 0.845);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.signInPage {
+  background-color: rgba(248, 248, 248, 0.845);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.form{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    width: 23rem;   
-     margin: -4rem 0 1rem 8rem;
+.form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 23rem;
+  margin: -4rem 0 1rem 8rem;
 }
 
-.signInBtn{
-    width: 5rem;
-    margin: 0.5rem 0;
+.signInBtn {
+  width: 5rem;
+  margin: 0.5rem 0;
 }

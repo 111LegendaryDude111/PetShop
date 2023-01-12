@@ -1,33 +1,36 @@
-import { tokenForFetch } from '../../../assets'
-import styles from './styles.module.scss'
+import { tokenForFetch } from "../../../assets";
+import styles from "./styles.module.scss";
+import React from "react";
 
- export const Likes = ({id}) => {
+export const Likes = ({ id }) => {
+  function clickLikesHandler(target) {
+    target.parentElement.classList.toggle("like");
+    target.parentElement.className.includes("like")
+      ? fetch(`https://api.react-learning.ru/products/likes/${target.id}`, {
+          method: "PUT",
+          headers: {
+            authorization: tokenForFetch,
+          },
+        })
+          .then((resp) => resp.json())
+          .catch((err) => console.log(`Error ${err.message}`))
+      : fetch(`https://api.react-learning.ru/products/likes/${target.id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: tokenForFetch,
+          },
+        })
+          .then((resp) => resp.json())
+          .catch((err) => console.log(`Error ${err.message}`));
+  }
 
-    function clickLikesHandler(target){
-        target.parentElement.classList.toggle('like')               
-        target.parentElement.className.includes('like') ? 
-            fetch(`https://api.react-learning.ru/products/likes/${target.id}`,{
-                method: "PUT",
-                headers: {
-                    authorization: tokenForFetch
-                }})
-                .then(resp =>resp.json())
-                .catch(err => console.log(`Error ${err.message}`))
-                :
-                 fetch(`https://api.react-learning.ru/products/likes/${target.id}`,{
-                    method: "DELETE",
-                    headers: {
-                        authorization: tokenForFetch
-                    }})
-                    .then(resp => resp.json())
-                    .catch(err => console.log(`Error ${err.message}`))
-    }
-
-    return(
-            <i id = {id} className={`fa-solid fa-heart ${styles.heartStyleForFavourite}`}
-                 onClick={(e) =>{
-                    clickLikesHandler(e.target)
-                }}
-            ></i>
-    )
- }
+  return (
+    <i
+      id={id}
+      className={`fa-solid fa-heart ${styles.heartStyleForFavourite}`}
+      onClick={(e) => {
+        clickLikesHandler(e.target);
+      }}
+    ></i>
+  );
+};

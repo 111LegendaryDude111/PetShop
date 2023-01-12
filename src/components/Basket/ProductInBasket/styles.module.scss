@@ -1,54 +1,52 @@
-.cardInBasket{
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    margin: 1rem 12rem 1rem 11rem;
-    padding: 1rem;
+.cardInBasket {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 1rem 12rem 1rem 11rem;
+  padding: 1rem;
 }
 
-.priceCount{
-    margin-left: 6rem;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    max-width: 34rem;
+.priceCount {
+  margin-left: 6rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 34rem;
 }
 
-.counterOfProduct{
-    display: flex;
-    justify-content: space-around;
-    align-items: baseline;
-    border: 2px solid black;
-    border-radius: 17%;
-    width: 6rem;
-    background-color: blanchedalmond;
-    font-size: 1.2rem;
-    
+.counterOfProduct {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  border: 2px solid black;
+  border-radius: 17%;
+  width: 6rem;
+  background-color: blanchedalmond;
+  font-size: 1.2rem;
 }
 
-.incrProd{
-    border: none;
-    border-radius:15%;
-    background-color: blanchedalmond;
+.incrProd {
+  border: none;
+  border-radius: 15%;
+  background-color: blanchedalmond;
 
-    &:hover{
-        background-color:rgb(201, 198, 193)
-    }
+  &:hover {
+    background-color: rgb(201, 198, 193);
+  }
 }
 
-.decrProd{
-    border: none;
-    border-radius:15%;
-    background-color: blanchedalmond;
+.decrProd {
+  border: none;
+  border-radius: 15%;
+  background-color: blanchedalmond;
 
-    &:hover{
-        background-color:rgb(201, 198, 193)
-    }
+  &:hover {
+    background-color: rgb(201, 198, 193);
+  }
 }
 
-.delete{
-    
-    &:hover{
-        color: red;
-    }
+.delete {
+  &:hover {
+    color: red;
+  }
 }

@@ -1,17 +1,19 @@
-
-
-export const productsInTheBasketFromLS = JSON.parse(localStorage.getItem('basketProducts'))? 
-JSON.parse(localStorage.getItem('basketProducts')):[];
-export const tokenForReduxFromLS = JSON.parse(localStorage.getItem('token'))?
-`Bearer ${JSON.parse(localStorage.getItem('token'))}`:[]
+export const productsInTheBasketFromLS = JSON.parse(
+  localStorage.getItem("basketProducts")
+)
+  ? JSON.parse(localStorage.getItem("basketProducts"))
+  : [];
+export const tokenForReduxFromLS = JSON.parse(localStorage.getItem("token"))
+  ? `Bearer ${JSON.parse(localStorage.getItem("token"))}`
+  : [];
 
 export const defaultState = {
-    productsInTheBasket: productsInTheBasketFromLS,
-    token: {
-        token: tokenForReduxFromLS
-    },
-}
-
+  productsInTheBasket: productsInTheBasketFromLS,
+  token: {
+    token: tokenForReduxFromLS,
+  },
+  registrationProducts: [],
+};
 //Старый редьсюер для редакса с экшенами, без редакс тулкита
 
 // export const TOKE_FOR_AUTHORIZATION = 'TOKE_FOR_AUTHORIZATION'
@@ -19,17 +21,17 @@ export const defaultState = {
 // export const DELETE_PRODUCTS_IN_BASKET = 'DELETE_PRODUCTS_IN_BASKET'
 // export const reducer = (state = defaultState, action) => {
 //     switch(action.type){
-//             case TOKE_FOR_AUTHORIZATION: 
+//             case TOKE_FOR_AUTHORIZATION:
 //                 return {...state, token: action.payload}
-                
+
 //             case PRODUCT_IN_BASKET:
 //                     let {productsInTheBasket} = state;
 //                     productsInTheBasket.push(action.payload);
 //                     productsInTheBasket = productsInTheBasket.reduce((acc, item) => {
 //                         if (acc.includes(item)) {
-//                           return acc; 
+//                           return acc;
 //                         }
-//                         return [...acc, item]; 
+//                         return [...acc, item];
 //                       }, []);
 //                     let basketProducts = JSON.stringify(productsInTheBasket)
 //                     localStorage.setItem('basketProducts',basketProducts )

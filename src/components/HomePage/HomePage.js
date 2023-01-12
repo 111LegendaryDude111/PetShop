@@ -1,17 +1,16 @@
-import { useState } from "react"
-import { Footer } from "./Footer/Footer"
-import { Header } from "./Header/Header"
-import { Main } from "./Main/Main"
-
+import React, { useState } from "react";
+import { Footer } from "./Footer/Footer";
+import { Header } from "./Header/Header";
+import { Main } from "./Main/Main";
 
 export const HomePage = () => {
-    const [searchValue,setSearchValue] = useState('')
-  
-    return(
-        <>
-        <Header setSearchValue={setSearchValue} searchValue={searchValue}/>
-        <Main  setSearchValue={setSearchValue} searchValue={searchValue}/>
-        <Footer />
-        </>
-    )
-}
+  const [searchValue, setSearchValue] = useState("");
+
+  return (
+    <>
+      <Header setSearchValue={setSearchValue} searchValue={searchValue} />
+      <Main setSearchValue={setSearchValue} searchValue={searchValue} />
+      <Footer />
+    </>
+  );
+};
