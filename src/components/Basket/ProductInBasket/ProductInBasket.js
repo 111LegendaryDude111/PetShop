@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { addProductsForRegistration } from "../../../Redux/slices/slices";
-import styles from "./styles.module.scss";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { addProductsForRegistration } from "../../../Redux/slices/slices"
+import styles from './styles.module.scss'
 
 export const ProductInBasket = ({
   id,
@@ -10,30 +11,36 @@ export const ProductInBasket = ({
   deleteProduct,
   stock,
   discount,
+  inputChekbox,
 }) => {
   const [count, setCount] = useState(1);
   const [checked, setChecked] = useState(false);
+  const dispatch = useDispatch()
+  const store = useSelector(store => store)
   price = discount ? price - (price * discount) / 100 : price;
-  function handleChange() {
-    setChecked(!checked);
+
+
+useEffect(() => {
+  if(inputChekbox.includes(id)){
+    setChecked(true)
   }
 
-  useEffect(() => {
-    if (checked === true) {
-      addProductsForRegistration(id);
-    } else {
-      console.log("not checked");
-    }
-  }, [checked]);
+  if(checked === true){
+      dispatch(addProductsForRegistration(id))
+  }
+},[checked])
+
+useEffect(() => console.log(store),[store])
+
   return (
     <div key={id} className={styles.cardInBasket}>
       <div className="d-flex mw-75%">
         <span>
-          <img src={img} style={{ height: 5 + "em" }} />
+          <img src={img} className={styles.imgInBasket} />
         </span>
         <h4>{name}</h4>
         <span>
-          <input type="checkbox" checked={checked} onChange={handleChange} />
+          <input id={id} type="checkbox" checked={checked} onChange={(e) => setChecked(prev => !prev) }/>
         </span>
       </div>
       <div className={styles.priceCount}>

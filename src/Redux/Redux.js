@@ -7,12 +7,16 @@ export const tokenForReduxFromLS = JSON.parse(localStorage.getItem("token"))
   ? `Bearer ${JSON.parse(localStorage.getItem("token"))}`
   : [];
 
+export const registredProductsFromLs = JSON.parse(localStorage.getItem("registredProducts"))
+  ? JSON.parse(localStorage.getItem("registredProducts"))
+  : [];
+
 export const defaultState = {
   productsInTheBasket: productsInTheBasketFromLS,
   token: {
     token: tokenForReduxFromLS,
   },
-  registrationProducts: [],
+  registrationProducts: registredProductsFromLs,
 };
 //Старый редьсюер для редакса с экшенами, без редакс тулкита
 

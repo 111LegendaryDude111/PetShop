@@ -1,9 +1,14 @@
 .cardInBasket {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  margin: 1rem 12rem 1rem 11rem;
+  background-color: rgb(220, 204, 204);
+  margin: 1rem 30rem 1rem 2rem;
   padding: 1rem;
+  border-radius:1.1rem
+}
+
+.imgInBasket{
+  height: 5em; 
 }
 
 .priceCount {

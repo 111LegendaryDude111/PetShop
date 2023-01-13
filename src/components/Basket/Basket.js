@@ -8,59 +8,34 @@ import styles from "./styles.module.scss";
 
 export const Basket = () => {
   const productsInTheBasket = useSelector((store) => store.basket);
-  const store = useSelector((store) => store);
-  const [arrayForCards, setArrayForCards] = useState([]);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  //     const {isError,isLoading,isSuccess,data} = useQuery(
-  //         {
-  //         queryKey: ['productsInBasket'],
-  //         queryFn: basketFuncWithQuery()
-  //     }
-  // )
-
-  // async function basketFuncWithQuery(){
-  //     let temp = productsInTheBasket.map(async (el) => {
-  //       return   fetch(`https://api.react-learning.ru/products/${el}`,{
-  //                     method: 'GET',
-  //                     headers:{
-  //                         authorization: tokenForFetch
-  //                     }
-  //             }).then(resp => resp.json())
-  //             .then(data => data)
-  //             .catch(err => console.log(err.message))
-  //         })
-  //         console.log(typeof Promise.all(temp).then(reslt=> reslt))
-
-  //            return Promise.all(temp).then(reslt=> reslt)
-  //     }
-
-  // })
+  const registredProducts = useSelector((store) => store.registredProducts)
+  const [arrayForCards, setArrayForCards] = useState([])
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  // const [totalprice,setTotalPrice] = useState(0)
   useEffect(() => {
-    console.log(getProductsInTheBasket(productsInTheBasket));
-  }, [productsInTheBasket]);
+    getProductsInTheBasket(productsInTheBasket)
+  
+  }, [productsInTheBasket,registredProducts])
 
-  // useEffect(()=>{
-  //     console.log(store)
-  // },[store])
 
   async function getProductsInTheBasket(arrayWithProductsId) {
-    let tempArray = [];
+    const tempArray = []
     for (let i = 0; i < arrayWithProductsId.length; i++) {
       await fetch(
         `https://api.react-learning.ru/products/${arrayWithProductsId[i]}`,
         {
           method: "GET",
           headers: {
-            authorization: tokenForFetch,
-          },
+            authorization: tokenForFetch
+          }
         }
       )
         .then((resp) => resp.json())
         .then((data) => tempArray.push(data));
     }
-    setArrayForCards(tempArray);
-    return tempArray;
+    setArrayForCards(tempArray)
+    return tempArray
   }
 
   function deleteProduct(e) {
@@ -103,9 +78,14 @@ export const Basket = () => {
               stock={el.stock}
               deleteProduct={deleteProduct}
               discount={el.discount}
+              inputChekbox= {registredProducts}
             />
           );
         })}
+        <div className={styles.totalprice}>
+          <h4>Итоговая цена: 0000 </h4>
+        <button>Оформить</button>
+        </div>
       </div>
     </div>
   );

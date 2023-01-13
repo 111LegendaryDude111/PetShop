@@ -6,14 +6,14 @@ const basketProductSlices = createSlice({
   initialState: defaultState.productsInTheBasket,
   reducers: {
     addProductsInBasket(state, action) {
-      let productsInBasket = state.includes(action.payload)
+      const productsInBasket = state.includes(action.payload)
         ? [...state]
         : [...state, action.payload];
       localStorage.setItem("basketProducts", JSON.stringify(productsInBasket));
       return productsInBasket;
     },
     deleteProductsInBasket(state, action) {
-      let productsAfterDelete = state.filter((el) => el !== action.payload);
+      const productsAfterDelete = state.filter((el) => el !== action.payload);
       localStorage.setItem(
         "basketProducts",
         JSON.stringify(productsAfterDelete)
@@ -28,24 +28,36 @@ const tokenForRedux = createSlice({
   initialState: defaultState.token,
   reducers: {
     addTokenRedux(state, action) {
-      state.token = action.payload;
-    },
-  },
-});
+      state.token = action.payload
+    }
+  }
+})
 const registrationProductsReducer = createSlice({
   name: "productsForRegistration",
   initialState: defaultState.registrationProducts,
   reducers: {
     addProductsForRegistration(state, action) {
-      state.push(action.payload);
+      let registredProduct = state.includes(action.payload)? [...state]: [...state,action.payload]
+      localStorage.setItem("registredProducts", JSON.stringify(registredProduct));
+      return registredProduct
     },
   },
 });
-export const { addProductsInBasket, deleteProductsInBasket } =
-  basketProductSlices.actions;
+
+// const changeStatus = (id) => {
+//   setTodos(prev => prev.map(el => {
+//       if (el.id === id){
+//         return {
+//             ...el,
+//             status:!el.status
+//           }        
+//         }
+//         return el
+//     })
+// )}
+export const { addProductsInBasket, deleteProductsInBasket } = basketProductSlices.actions;
 export const { addTokenRedux } = tokenForRedux.actions;
-export const { addProductsForRegistration } =
-  registrationProductsReducer.actions;
+export const { addProductsForRegistration,getState } = registrationProductsReducer.actions;
 
 export const basketProductReducer = basketProductSlices.reducer;
 export const tokenReducer = tokenForRedux.reducer;
