@@ -8,22 +8,43 @@ import styles from "./styles.module.scss";
 
 export const Basket = () => {
   const productsInTheBasket = useSelector((store) => store.basket);
-  const registredProducts = useSelector((store) => store.registredProducts)
   const [arrayForCards, setArrayForCards] = useState([])
+  const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  // const [totalprice,setTotalPrice] = useState(0)
   useEffect(() => {
     getProductsInTheBasket(productsInTheBasket)
-  
-  }, [productsInTheBasket,registredProducts])
+    let checkedProducts = productsInTheBasket.filter(el => el.checked === true)
+    tempFuncForTotalPrice(checkedProducts)
+  }, [productsInTheBasket])
+
+
+  async function tempFuncForTotalPrice(arr) {
+    const tempArr = []
+    for (let i = 0; i < arr.length; i++) {
+      await fetch(
+        `https://api.react-learning.ru/products/${arr[i].id}`,
+        {
+          method: "GET",
+          headers: {
+            authorization: tokenForFetch
+          }
+        }
+      )
+        .then((resp) => resp.json())
+        .then((data) => tempArr.push(data));
+    }
+    // Нужно доработать формулу с учетом СКИДКИ И КОЛИЧЕСТВА ТОВАРОВ
+    setTotalPrice(tempArr.reduce((sum,el) => sum + el.price,0))
+    return tempArr
+  }
 
 
   async function getProductsInTheBasket(arrayWithProductsId) {
     const tempArray = []
     for (let i = 0; i < arrayWithProductsId.length; i++) {
       await fetch(
-        `https://api.react-learning.ru/products/${arrayWithProductsId[i]}`,
+        `https://api.react-learning.ru/products/${arrayWithProductsId[i].id}`,
         {
           method: "GET",
           headers: {
@@ -35,6 +56,11 @@ export const Basket = () => {
         .then((data) => tempArray.push(data));
     }
     setArrayForCards(tempArray)
+//     console.log({tempArray})
+//     /*tempArray
+//     
+//     console.log({tempArr})
+//       console.log(result)
     return tempArray
   }
 
@@ -62,6 +88,7 @@ export const Basket = () => {
       </div>
     );
   }
+  
   return (
     <div className={styles.basketStyle}>
       <h2>Список товаров:</h2>
@@ -78,12 +105,11 @@ export const Basket = () => {
               stock={el.stock}
               deleteProduct={deleteProduct}
               discount={el.discount}
-              inputChekbox= {registredProducts}
             />
           );
         })}
         <div className={styles.totalprice}>
-          <h4>Итоговая цена: 0000 </h4>
+          <h4>Итоговая цена: {totalPrice} </h4>
         <button>Оформить</button>
         </div>
       </div>

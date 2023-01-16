@@ -31,7 +31,8 @@ export const Main = ({ searchValue, setSearchValue }) => {
     // Запрос для отображения лайков
     fetch("https://api.react-learning.ru/v2/sm8/users/me", {
       headers: {
-        authorization: store.token.token,
+        // authorization: store.token.token,
+        authorization: tokenForFetch,
       },
     })
       .then((resp) => resp.json())
@@ -58,6 +59,8 @@ export const Main = ({ searchValue, setSearchValue }) => {
     const target = e.target;
     dispatch(addProductsInBasket(target.id));
   }
+
+  // useEffect(() => console.log(store) ,[store])
   if (isLoading) {
     return <Loader />;
   } else if (isError) {

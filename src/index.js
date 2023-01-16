@@ -13,7 +13,6 @@ import { Basket } from "./components/Basket/Basket";
 import { configureStore } from "@reduxjs/toolkit";
 import {
   basketProductReducer,
-  registrationReducer,
   tokenReducer,
 } from "./Redux/slices/slices";
 
@@ -48,7 +47,6 @@ const store = configureStore({
   reducer: {
     basket: basketProductReducer,
     token: tokenReducer,
-    registredProducts: registrationReducer,
   },
 });
 const queryClient = new QueryClient();

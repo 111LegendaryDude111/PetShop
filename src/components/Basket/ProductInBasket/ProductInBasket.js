@@ -1,61 +1,64 @@
-import React, { useEffect, useState } from "react"
+import React, { createRef, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { addProductsForRegistration } from "../../../Redux/slices/slices"
+import { changeStatusOfProductInBasket, decrementProductsInBasket, incrementProductsInBasket } from "../../../Redux/slices/slices"
 import styles from './styles.module.scss'
 
 export const ProductInBasket = ({
   id,
+  i,
   img,
   name,
   price,
   deleteProduct,
   stock,
   discount,
-  inputChekbox,
 }) => {
   const [count, setCount] = useState(1);
   const [checked, setChecked] = useState(false);
   const dispatch = useDispatch()
-  const store = useSelector(store => store)
+  const store = useSelector(store => store.basket)
+  const idRef = createRef();
+
   price = discount ? price - (price * discount) / 100 : price;
+  useEffect(() => {
+    let tempProductCard = store.find(findinxeFunc)
+    setCount(tempProductCard.count)
+    setChecked(tempProductCard.checked)
+    function findinxeFunc(el, i, arr){
+      let element = el.id;
+      return element === id;
+    }
 
 
-useEffect(() => {
-  if(inputChekbox.includes(id)){
-    setChecked(true)
-  }
+    // console.log(store)
+  },[store])
 
-  if(checked === true){
-      dispatch(addProductsForRegistration(id))
-  }
-},[checked])
-
-useEffect(() => console.log(store),[store])
 
   return (
-    <div key={id} className={styles.cardInBasket}>
+    <div ref={idRef}  id={id} key={i} className={styles.cardInBasket}>
       <div className="d-flex mw-75%">
         <span>
           <img src={img} className={styles.imgInBasket} />
         </span>
         <h4>{name}</h4>
         <span>
-          <input id={id} type="checkbox" checked={checked} onChange={(e) => setChecked(prev => !prev) }/>
+          <input  type="checkbox" checked={checked} 
+          onChange={(e) => dispatch(changeStatusOfProductInBasket(idRef.current.id))}/>
         </span>
       </div>
       <div className={styles.priceCount}>
         <div>{" " + price === 1 ? price : price * count} р</div>
         <div className={styles.counterOfProduct}>
-          <button
+          <button 
             className={`fa-solid fa-minus ${styles.decrProd}`}
             disabled={count < 1 && true}
-            onClick={() => setCount((prev) => prev - 1)}
+            onClick={(e) =>  dispatch(decrementProductsInBasket(idRef.current.id))}
           ></button>
           <span> {count}</span>
           <button
             className={`fa-solid fa-plus ${styles.incrProd}`}
             disabled={count === stock && true}
-            onClick={() => setCount((prev) => prev + 1)}
+            onClick={(e) => dispatch(incrementProductsInBasket(idRef.current.id))}
           ></button>
         </div>
         <div>Товаров в наличии: {stock}</div>
