@@ -34,8 +34,15 @@ export const Basket = () => {
         .then((resp) => resp.json())
         .then((data) => tempArr.push(data));
     }
-    // Нужно доработать формулу с учетом СКИДКИ И КОЛИЧЕСТВА ТОВАРОВ
-    setTotalPrice(tempArr.reduce((sum,el) => sum + el.price,0))
+    // Нужно доработать формулу с учетом КОЛИЧЕСТВА ТОВАРОВ
+    console.log(tempArr)
+    setTotalPrice(tempArr.reduce((sum,el) => {
+          if(el.discount){
+          return  sum += (el.price - (el.price * el.discount) / 100)
+          }else{
+            return sum += el.price
+          }
+          },0))
     return tempArr
   }
 
