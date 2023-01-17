@@ -16,6 +16,7 @@ export const Basket = () => {
     getProductsInTheBasket(productsInTheBasket)
     let checkedProducts = productsInTheBasket.filter(el => el.checked === true)
     tempFuncForTotalPrice(checkedProducts)
+    console.log({productsInTheBasket})
   }, [productsInTheBasket])
 
 

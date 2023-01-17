@@ -36,8 +36,6 @@ const basketProductSlices = createSlice({
           "basketProducts",
           JSON.stringify(state)
           );
-          // return state
-        // return productsAfterDelete;
     },
     changeStatusOfProductInBasket(state,action){
       function findinxeFunc(el, i, arr){
