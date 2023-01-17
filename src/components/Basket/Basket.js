@@ -56,11 +56,6 @@ export const Basket = () => {
         .then((data) => tempArray.push(data));
     }
     setArrayForCards(tempArray)
-//     console.log({tempArray})
-//     /*tempArray
-//     
-//     console.log({tempArr})
-//       console.log(result)
     return tempArray
   }
 

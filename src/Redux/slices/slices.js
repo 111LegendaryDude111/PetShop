@@ -26,12 +26,18 @@ const basketProductSlices = createSlice({
           localStorage.setItem("basketProducts", JSON.stringify(state))   
     },
     deleteProductsInBasket(state, action) {
-        const productsAfterDelete = state.filter((el) => el !== action.payload);
+      function findinxeFunc(el, i, arr){
+        const element = el.id;
+        return element === action.payload
+      }
+        const productsAfterDelete = state.findIndex(findinxeFunc);
+        state.splice(productsAfterDelete, 1)
         localStorage.setItem(
           "basketProducts",
-          JSON.stringify(productsAfterDelete)
-        );
-        return productsAfterDelete;
+          JSON.stringify(state)
+          );
+          // return state
+        // return productsAfterDelete;
     },
     changeStatusOfProductInBasket(state,action){
       function findinxeFunc(el, i, arr){
@@ -48,7 +54,6 @@ const basketProductSlices = createSlice({
       return element === action.payload
     }
     let i = state.findIndex(findinxeFunc)
-    console.log(i)
       state[i].count = state[i].count + 1
       localStorage.setItem("basketProducts", JSON.stringify(state))   
   },

@@ -22,15 +22,17 @@ export const ProductInBasket = ({
   price = discount ? price - (price * discount) / 100 : price;
   useEffect(() => {
     let tempProductCard = store.find(findinxeFunc)
-    setCount(tempProductCard.count)
-    setChecked(tempProductCard.checked)
+    if (tempProductCard === undefined){
+      console.log({tempProductCard})
+      return
+    }else{
+      setCount(tempProductCard.count)
+      setChecked(tempProductCard.checked)
+    }
     function findinxeFunc(el, i, arr){
       let element = el.id;
       return element === id;
     }
-
-
-    // console.log(store)
   },[store])
 
 
