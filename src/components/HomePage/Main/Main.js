@@ -66,10 +66,17 @@ export const Main = ({ searchValue, setSearchValue }) => {
   } else if (isError) {
     console.log(`error: ${error.message}`);
   } else if (isSuccess) {
-    let products = data.products;
-    const filtredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    // let products = data.products;
+    // const filtredProducts = products.filter(product => product.name.toLowerCase().includes())
+    let filtredProducts ;
+    console.log({searchValue})
+    console.log({filtredProducts})
+    if(searchValue.length < 1){
+      filtredProducts = data.products;
+    }else{
+      filtredProducts = searchValue;
+    }
+
     return (
       <main>
         <div className={`container ${styles.containerPaddings}`}>

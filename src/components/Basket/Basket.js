@@ -16,7 +16,6 @@ export const Basket = () => {
     getProductsInTheBasket(productsInTheBasket)
     let checkedProducts = productsInTheBasket.filter(el => el.checked === true)
     tempFuncForTotalPrice(checkedProducts)
-    console.log({productsInTheBasket})
   }, [productsInTheBasket])
 
 
@@ -35,8 +34,8 @@ export const Basket = () => {
         .then((resp) => resp.json())
         .then((data) => tempArr.push(data));
     }
+    // console.log(tempArr)
     // Нужно доработать формулу с учетом КОЛИЧЕСТВА ТОВАРОВ
-    console.log(tempArr)
     setTotalPrice(tempArr.reduce((sum,el) => {
           if(el.discount){
           return  sum += (el.price - (el.price * el.discount) / 100)

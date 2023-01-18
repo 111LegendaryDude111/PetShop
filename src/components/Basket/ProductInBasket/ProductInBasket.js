@@ -49,7 +49,8 @@ export const ProductInBasket = ({
         </span>
       </div>
       <div className={styles.priceCount}>
-        <div>{" " + price === 1 ? price : price * count} р</div>
+        <div className={styles.price}>
+          {" " + price === 1 ? price : price * count} р</div>
         <div className={styles.counterOfProduct}>
           <button 
             className={`fa-solid fa-minus ${styles.decrProd}`}

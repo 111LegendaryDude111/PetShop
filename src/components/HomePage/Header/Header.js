@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Search, Searchz } from "../../Search/Search";
 import styles from "./styles.module.scss";
 
 export const Header = ({ setSearchValue, searchValue }) => {
   const navigate = useNavigate();
   const store = useSelector((state) => state);
-  useEffect(() => {}, [store]);
 
   function goToProfile() {
     navigate("/userProfile");
@@ -27,7 +27,7 @@ export const Header = ({ setSearchValue, searchValue }) => {
         <h1>DogFood</h1>
       </a>
       <div className=" mb-3">
-        <input
+        {/* <input
           type="text"
           className={`${styles.searchInput}`}
           placeholder="Search"
@@ -37,7 +37,8 @@ export const Header = ({ setSearchValue, searchValue }) => {
         <i
           className={`fa-solid fa-circle-xmark ${styles.cross}`}
           onClick={() => setSearchValue("")}
-        ></i>
+        ></i> */}
+        <Searchz setSearchValue={setSearchValue}/>
       </div>
       <div className={styles.rightAside}>
         <span>
