@@ -6,14 +6,13 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from "./styles.module.scss";
 import "./likeAndUnlike.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addProductsInBasket,
   addTokenRedux,
 } from "../../../Redux/slices/slices";
 
 export const Main = ({ searchValue, setSearchValue }) => {
-  const store = useSelector((store) => store);
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
   const { data, isLoading, isError, error, isSuccess } = useQuery({
@@ -55,22 +54,16 @@ export const Main = ({ searchValue, setSearchValue }) => {
     }
   }
 
-  function goToBasket(e) {
-    const target = e.target;
-    dispatch(addProductsInBasket(target.id));
+  function goToBasket(id, discount,price) {
+    dispatch(addProductsInBasket({id,discount,price}));
   }
 
-  // useEffect(() => console.log(store) ,[store])
   if (isLoading) {
     return <Loader />;
   } else if (isError) {
     console.log(`error: ${error.message}`);
   } else if (isSuccess) {
-    // let products = data.products;
-    // const filtredProducts = products.filter(product => product.name.toLowerCase().includes())
     let filtredProducts ;
-    console.log({searchValue})
-    console.log({filtredProducts})
     if(searchValue.length < 1){
       filtredProducts = data.products;
     }else{
@@ -154,7 +147,10 @@ export const Main = ({ searchValue, setSearchValue }) => {
                       <button
                         id={el._id}
                         className={`btn ${styles.btnStyle}`}
-                        onClick={goToBasket}
+                        onClick={() => goToBasket(el._id,el.discount,el.price)}
+                        // onClick={(e) => {
+                        //   TEST(el._id,el.discount,el.price)
+                        // }}
                       >
                         В корзину
                       </button>

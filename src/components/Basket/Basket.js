@@ -15,37 +15,15 @@ export const Basket = () => {
   useEffect(() => {
     getProductsInTheBasket(productsInTheBasket)
     let checkedProducts = productsInTheBasket.filter(el => el.checked === true)
-    tempFuncForTotalPrice(checkedProducts)
+    setTotalPrice(checkedProducts.reduce((sum,el) =>{
+      if(el.discount){
+        const discountedPrice = el.price - (el.price * el.discount) / 100 
+        return sum += el.count * discountedPrice
+      }else{
+        return sum += el.count * el.price
+      }
+    },0))
   }, [productsInTheBasket])
-
-
-  async function tempFuncForTotalPrice(arr) {
-    const tempArr = []
-    for (let i = 0; i < arr.length; i++) {
-      await fetch(
-        `https://api.react-learning.ru/products/${arr[i].id}`,
-        {
-          method: "GET",
-          headers: {
-            authorization: tokenForFetch
-          }
-        }
-      )
-        .then((resp) => resp.json())
-        .then((data) => tempArr.push(data));
-    }
-    // console.log(tempArr)
-    // Нужно доработать формулу с учетом КОЛИЧЕСТВА ТОВАРОВ
-    setTotalPrice(tempArr.reduce((sum,el) => {
-          if(el.discount){
-          return  sum += (el.price - (el.price * el.discount) / 100)
-          }else{
-            return sum += el.price
-          }
-          },0))
-    return tempArr
-  }
-
 
   async function getProductsInTheBasket(arrayWithProductsId) {
     const tempArray = []

@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { defaultState } from "../Redux";
 
-
-
-
 const basketProductSlices = createSlice({
   name: "basket",
   initialState: defaultState.productsInTheBasket,
   reducers: {
     addProductsInBasket(state, action) {
+      console.log(action)
         function findinxeFunc(el, i, arr){
           const element = el.id;
-          return element === action.payload
+          return element === action.payload.id
         }
         let temp = state.findIndex(findinxeFunc)
         if(temp === -1){
           state.push({
-            id:action.payload,
+            id:action.payload.id,
             count:1,
-            checked:false
+            checked:false,
+            discount: action.payload.discount,
+            price: action.payload.price
           })  
         }else{
           state[temp].count++
@@ -64,6 +64,7 @@ const basketProductSlices = createSlice({
       state[i].count = state[i].count - 1
       localStorage.setItem("basketProducts", JSON.stringify(state)) 
   },
+
 }
 });
 
