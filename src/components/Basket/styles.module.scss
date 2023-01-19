@@ -40,3 +40,12 @@
   display: flex;
   flex-direction: column;
 }
+
+.btn{
+  border: none;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    background: rgba(249, 225, 0, 0.7803921569);
+    color: black;
+    font-weight: 600;
+}

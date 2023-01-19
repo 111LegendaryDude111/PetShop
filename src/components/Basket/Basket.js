@@ -90,7 +90,7 @@ export const Basket = () => {
         })}
         <div className={styles.totalprice}>
           <h4>Итоговая цена: {totalPrice} </h4>
-        <button>Оформить</button>
+        <button className={styles.btn}>Оформить</button>
         </div>
       </div>
     </div>
