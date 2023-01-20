@@ -6,3 +6,15 @@
 .user_profile {
   margin: 1rem 2rem;
 }
+
+.modal{
+    display: none;
+    max-width: 30rem;
+    position: absolute;
+    top: 10rem;
+    right: 41rem;
+}
+
+.active{
+  display: block;
+}
