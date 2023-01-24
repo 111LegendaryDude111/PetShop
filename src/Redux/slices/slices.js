@@ -6,66 +6,62 @@ const basketProductSlices = createSlice({
   initialState: defaultState.productsInTheBasket,
   reducers: {
     addProductsInBasket(state, action) {
-      console.log(action)
-        function findinxeFunc(el, i, arr){
-          const element = el.id;
-          return element === action.payload.id
-        }
-        let temp = state.findIndex(findinxeFunc)
-        if(temp === -1){
-          state.push({
-            id:action.payload.id,
-            count:1,
-            checked:false,
-            discount: action.payload.discount,
-            price: action.payload.price
-          })  
-        }else{
-          state[temp].count++
-        }
-          localStorage.setItem("basketProducts", JSON.stringify(state))   
+      console.log(action);
+      function findinxeFunc(el, i, arr) {
+        const element = el.id;
+        return element === action.payload.id;
+      }
+      let temp = state.findIndex(findinxeFunc);
+      if (temp === -1) {
+        state.push({
+          id: action.payload.id,
+          count: 1,
+          checked: false,
+          discount: action.payload.discount,
+          price: action.payload.price,
+        });
+      } else {
+        state[temp].count++;
+      }
+      localStorage.setItem("basketProducts", JSON.stringify(state));
     },
     deleteProductsInBasket(state, action) {
-      function findinxeFunc(el, i, arr){
+      function findinxeFunc(el, i, arr) {
         const element = el.id;
-        return element === action.payload
+        return element === action.payload;
       }
-        const productsAfterDelete = state.findIndex(findinxeFunc);
-        state.splice(productsAfterDelete, 1)
-        localStorage.setItem(
-          "basketProducts",
-          JSON.stringify(state)
-          );
+      const productsAfterDelete = state.findIndex(findinxeFunc);
+      state.splice(productsAfterDelete, 1);
+      localStorage.setItem("basketProducts", JSON.stringify(state));
     },
-    changeStatusOfProductInBasket(state,action){
-      function findinxeFunc(el, i, arr){
+    changeStatusOfProductInBasket(state, action) {
+      function findinxeFunc(el, i, arr) {
         const element = el.id;
-        return element === action.payload
+        return element === action.payload;
       }
-      let i = state.findIndex(findinxeFunc)
-      state[i].checked = !state[i].checked
-      localStorage.setItem("basketProducts", JSON.stringify(state))   
+      let i = state.findIndex(findinxeFunc);
+      state[i].checked = !state[i].checked;
+      localStorage.setItem("basketProducts", JSON.stringify(state));
     },
-  incrementProductsInBasket(state,action){
-    function findinxeFunc(el, i, arr){
-      const element = el.id;
-      return element === action.payload
-    }
-    let i = state.findIndex(findinxeFunc)
-      state[i].count = state[i].count + 1
-      localStorage.setItem("basketProducts", JSON.stringify(state))   
+    incrementProductsInBasket(state, action) {
+      function findinxeFunc(el, i, arr) {
+        const element = el.id;
+        return element === action.payload;
+      }
+      let i = state.findIndex(findinxeFunc);
+      state[i].count = state[i].count + 1;
+      localStorage.setItem("basketProducts", JSON.stringify(state));
+    },
+    decrementProductsInBasket(state, action) {
+      function findinxeFunc(el, i, arr) {
+        const element = el.id;
+        return element === action.payload;
+      }
+      let i = state.findIndex(findinxeFunc);
+      state[i].count = state[i].count - 1;
+      localStorage.setItem("basketProducts", JSON.stringify(state));
+    },
   },
-  decrementProductsInBasket(state,action){
-    function findinxeFunc(el, i, arr){
-      const element = el.id;
-      return element === action.payload
-    }
-    let i = state.findIndex(findinxeFunc)
-      state[i].count = state[i].count - 1
-      localStorage.setItem("basketProducts", JSON.stringify(state)) 
-  },
-
-}
 });
 
 const tokenForRedux = createSlice({
@@ -73,14 +69,18 @@ const tokenForRedux = createSlice({
   initialState: defaultState.token,
   reducers: {
     addTokenRedux(state, action) {
-      state.token = action.payload
-    }
-  }
-})
+      state.token = action.payload;
+    },
+  },
+});
 
-
-export const { addProductsInBasket, deleteProductsInBasket,changeStatusOfProductInBasket,
-  incrementProductsInBasket,decrementProductsInBasket } = basketProductSlices.actions;
+export const {
+  addProductsInBasket,
+  deleteProductsInBasket,
+  changeStatusOfProductInBasket,
+  incrementProductsInBasket,
+  decrementProductsInBasket,
+} = basketProductSlices.actions;
 export const { addTokenRedux } = tokenForRedux.actions;
 
 export const basketProductReducer = basketProductSlices.reducer;

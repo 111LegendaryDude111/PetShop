@@ -38,7 +38,7 @@ export const Header = ({ setSearchValue, searchValue }) => {
           className={`fa-solid fa-circle-xmark ${styles.cross}`}
           onClick={() => setSearchValue("")}
         ></i> */}
-        <Searchz setSearchValue={setSearchValue}/>
+        <Searchz setSearchValue={setSearchValue} />
       </div>
       <div className={styles.rightAside}>
         <span>

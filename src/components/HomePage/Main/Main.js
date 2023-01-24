@@ -11,6 +11,7 @@ import {
   addProductsInBasket,
   addTokenRedux,
 } from "../../../Redux/slices/slices";
+import { DetailedProductCard } from "./DetailedProductCard/DetailedProductCard";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
@@ -54,8 +55,12 @@ export const Main = ({ searchValue, setSearchValue }) => {
     }
   }
 
-  function goToBasket(id, discount,price) {
-    dispatch(addProductsInBasket({id,discount,price}));
+  function goToBasket(id, discount, price) {
+    dispatch(addProductsInBasket({ id, discount, price }));
+  }
+
+  function goToDetailedProductCard(id) {
+    navigate(`/homepage/${id}`);
   }
 
   if (isLoading) {
@@ -63,10 +68,10 @@ export const Main = ({ searchValue, setSearchValue }) => {
   } else if (isError) {
     console.log(`error: ${error.message}`);
   } else if (isSuccess) {
-    let filtredProducts ;
-    if(searchValue.length < 1){
+    let filtredProducts;
+    if (searchValue.length < 1) {
       filtredProducts = data.products;
-    }else{
+    } else {
       filtredProducts = searchValue;
     }
 
@@ -121,7 +126,13 @@ export const Main = ({ searchValue, setSearchValue }) => {
                     <span className={el.likes.includes(userId) ? "like" : ""}>
                       <Likes id={el._id} />
                     </span>
-                    <div className="card-body">
+                    <div
+                      className="card-body"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToDetailedProductCard(el._id, el.name);
+                      }}
+                    >
                       <div
                         className={`card-text ${
                           el.discount ? styles.discPrice : styles.price
@@ -147,10 +158,9 @@ export const Main = ({ searchValue, setSearchValue }) => {
                       <button
                         id={el._id}
                         className={`btn ${styles.btnStyle}`}
-                        onClick={() => goToBasket(el._id,el.discount,el.price)}
-                        // onClick={(e) => {
-                        //   TEST(el._id,el.discount,el.price)
-                        // }}
+                        onClick={() =>
+                          goToBasket(el._id, el.discount, el.price)
+                        }
                       >
                         В корзину
                       </button>

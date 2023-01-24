@@ -8,40 +8,44 @@ import styles from "./styles.module.scss";
 
 export const Basket = () => {
   const productsInTheBasket = useSelector((store) => store.basket);
-  const [arrayForCards, setArrayForCards] = useState([])
+  const [arrayForCards, setArrayForCards] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
-    getProductsInTheBasket(productsInTheBasket)
-    let checkedProducts = productsInTheBasket.filter(el => el.checked === true)
-    setTotalPrice(checkedProducts.reduce((sum,el) =>{
-      if(el.discount){
-        const discountedPrice = el.price - (el.price * el.discount) / 100 
-        return sum += el.count * discountedPrice
-      }else{
-        return sum += el.count * el.price
-      }
-    },0))
-  }, [productsInTheBasket])
+    getProductsInTheBasket(productsInTheBasket);
+    let checkedProducts = productsInTheBasket.filter(
+      (el) => el.checked === true
+    );
+    setTotalPrice(
+      checkedProducts.reduce((sum, el) => {
+        if (el.discount) {
+          const discountedPrice = el.price - (el.price * el.discount) / 100;
+          return (sum += el.count * discountedPrice);
+        } else {
+          return (sum += el.count * el.price);
+        }
+      }, 0)
+    );
+  }, [productsInTheBasket]);
 
   async function getProductsInTheBasket(arrayWithProductsId) {
-    const tempArray = []
+    const tempArray = [];
     for (let i = 0; i < arrayWithProductsId.length; i++) {
       await fetch(
         `https://api.react-learning.ru/products/${arrayWithProductsId[i].id}`,
         {
           method: "GET",
           headers: {
-            authorization: tokenForFetch
-          }
+            authorization: tokenForFetch,
+          },
         }
       )
         .then((resp) => resp.json())
         .then((data) => tempArray.push(data));
     }
-    setArrayForCards(tempArray)
-    return tempArray
+    setArrayForCards(tempArray);
+    return tempArray;
   }
 
   function deleteProduct(e) {
@@ -68,7 +72,7 @@ export const Basket = () => {
       </div>
     );
   }
-  
+
   return (
     <div className={styles.basketStyle}>
       <h2>Список товаров:</h2>
@@ -90,7 +94,7 @@ export const Basket = () => {
         })}
         <div className={styles.totalprice}>
           <h4>Итоговая цена: {totalPrice} </h4>
-        <button className={styles.btn}>Оформить</button>
+          <button className={styles.btn}>Оформить</button>
         </div>
       </div>
     </div>

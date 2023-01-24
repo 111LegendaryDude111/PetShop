@@ -6,11 +6,10 @@ export const productsInTheBasketFromLS = JSON.parse(
 export const tokenForReduxFromLS = JSON.parse(localStorage.getItem("token"))
   ? `Bearer ${JSON.parse(localStorage.getItem("token"))}`
   : [];
-  
+
 export const defaultState = {
   productsInTheBasket: productsInTheBasketFromLS,
   token: {
     token: tokenForReduxFromLS,
   },
 };
-

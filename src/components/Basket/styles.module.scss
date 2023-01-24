@@ -21,7 +21,6 @@
 //Товары есть в корзине
 
 .basketStyle {
-
   position: absolute;
   top: 0px;
   right: 0px;
@@ -29,7 +28,7 @@
   left: 0px;
 }
 
-.totalprice{
+.totalprice {
   position: fixed;
   top: 9rem;
   right: 14rem;
@@ -41,11 +40,11 @@
   flex-direction: column;
 }
 
-.btn{
+.btn {
   border: none;
-    border-radius: 1rem;
-    font-size: 1.3rem;
-    background: rgba(249, 225, 0, 0.7803921569);
-    color: black;
-    font-weight: 600;
+  border-radius: 1rem;
+  font-size: 1.3rem;
+  background: rgba(249, 225, 0, 0.7803921569);
+  color: black;
+  font-weight: 600;
 }

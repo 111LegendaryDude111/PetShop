@@ -11,10 +11,8 @@ import { Stocks } from "./components/HomePage/Footer/Stocks/Stocks";
 import { Provider } from "react-redux";
 import { Basket } from "./components/Basket/Basket";
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  basketProductReducer,
-  tokenReducer,
-} from "./Redux/slices/slices";
+import { basketProductReducer, tokenReducer } from "./Redux/slices/slices";
+import { DetailedProductCard } from "./components/HomePage/Main/DetailedProductCard/DetailedProductCard";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "homepage",
     element: <HomePage />,
+  },
+  {
+    path: "homepage/:productId",
+    element: <DetailedProductCard />,
   },
   {
     path: "userProfile",
