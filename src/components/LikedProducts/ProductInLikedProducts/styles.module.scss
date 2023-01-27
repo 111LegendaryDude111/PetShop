@@ -1,0 +1,65 @@
+.cardInBasket {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(220, 204, 204);
+  margin: 1rem 30rem 1rem 2rem;
+  padding: 1rem;
+  border-radius: 1.1rem;
+}
+
+.imgInBasket {
+  height: 5em;
+}
+
+.priceCount {
+  margin-left: 6rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 34rem;
+}
+
+.counterOfProduct {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  border: 2px solid black;
+  border-radius: 17%;
+  width: 6rem;
+  background-color: blanchedalmond;
+  font-size: 1.2rem;
+}
+
+.incrProd {
+  border: none;
+  border-radius: 15%;
+  background-color: blanchedalmond;
+
+  &:hover {
+    background-color: rgb(201, 198, 193);
+  }
+}
+
+.decrProd {
+  border: none;
+  border-radius: 15%;
+  background-color: blanchedalmond;
+
+  &:hover {
+    background-color: rgb(201, 198, 193);
+  }
+}
+
+.delete {
+  &:hover {
+    color: red;
+  }
+}
+
+.discountPrice {
+  text-decoration: line-through;
+}
+
+.price {
+  color: black;
+}

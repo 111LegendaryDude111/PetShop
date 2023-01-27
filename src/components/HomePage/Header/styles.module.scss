@@ -96,3 +96,18 @@
     justify-content: center;
   }
 }
+
+.likesCountOfProductsContainer {
+  position: relative;
+
+  &__Likes {
+    position: absolute;
+    right: 1rem;
+    top: -1rem;
+    background-color: red;
+    border-radius: 50%;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+}

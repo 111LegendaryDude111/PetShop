@@ -74,6 +74,26 @@ const tokenForRedux = createSlice({
   },
 });
 
+const likedProductsRedux = createSlice({
+  name: "likes",
+  initialState: defaultState.likedProducts,
+  reducers: {
+    addProductInLikedProducts(state, action) {
+      state.push(action.payload);
+      localStorage.setItem("likedProducts", JSON.stringify(state));
+    },
+    deleteProductInLikedProducts(state, action) {
+      function findinxeFunc(el, i, arr) {
+        const element = el;
+        return element === action.payload;
+      }
+      const likedProductsAfterDelete = state.findIndex(findinxeFunc);
+      state.splice(likedProductsAfterDelete, 1);
+      localStorage.setItem("likedProducts", JSON.stringify(state));
+    },
+  },
+});
+
 export const {
   addProductsInBasket,
   deleteProductsInBasket,
@@ -82,6 +102,12 @@ export const {
   decrementProductsInBasket,
 } = basketProductSlices.actions;
 export const { addTokenRedux } = tokenForRedux.actions;
+export const {
+  addProductInLikedProducts,
+  deleteProductInLikedProducts,
+  huita,
+} = likedProductsRedux.actions;
 
 export const basketProductReducer = basketProductSlices.reducer;
 export const tokenReducer = tokenForRedux.reducer;
+export const likedProductsReducer = likedProductsRedux.reducer;

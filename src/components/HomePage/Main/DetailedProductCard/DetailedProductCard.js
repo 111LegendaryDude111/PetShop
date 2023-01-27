@@ -14,7 +14,6 @@ export const DetailedProductCard = () => {
     queryFn: getProduct,
   });
   const { productId } = useParams();
-  const [product, setProduct] = useState({});
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,7 +32,6 @@ export const DetailedProductCard = () => {
         }
       );
       let result = await response.json();
-      setProduct(result);
       return result;
     } catch (err) {
       return err;
@@ -58,52 +56,61 @@ export const DetailedProductCard = () => {
     return <Loader />;
   } else
     return (
-      <div key={product._id} className={`card col col-3 ${styles.divCard}`}>
+      <div key={data._id} className={`card col col-3 ${styles.divCard}`}>
         <span className={styles.discountPrice}>
-          {product.discount ? `-${product.discount}%` : ""}
+          {data.discount ? `-${data.discount}%` : ""}
         </span>
-        {/* <span className={styles.newProduct}>
-                      {product.tags[0] === "new" ? `Новинка` : ""}
-                    </span> */}
+        <span className={styles.newProduct}>
+          {data.tags[0] === "new" ? `Новинка` : ""}
+        </span>
         <span className={styles.spanForImg}>
           <img
-            key={product.pictures}
-            src={product.pictures}
+            key={data.pictures}
+            src={data.pictures}
             className={`card-img-top ${styles.cardImg}`}
-            alt={product.name}
+            alt={data.name}
           />
         </span>
-        {/* <span className={product.likes.includes(userId) ? "like" : ""}>
-                        <Likes id={product._id} />
-                        </span> */}
+        <span className={data.likes.includes(userId) ? "like" : ""}>
+          <Likes id={data._id} />
+        </span>
         <div className="card-body">
           <div
             className={`card-text ${
-              product.discount ? styles.discPrice : styles.price
+              data.discount ? styles.discPrice : styles.price
             }`}
           >
             <div className={styles.oldPrice}>
-              {product.discount ? product.price + "P" : ""}
+              {data.discount ? data.price + "P" : ""}
             </div>
-            {product.discount
-              ? Math.round(
-                  product.price - product.price * (product.discount / 100)
-                )
-              : product.price}{" "}
+            {data.discount
+              ? Math.round(data.price - data.price * (data.discount / 100))
+              : data.price}{" "}
             <i className="fa-solid fa-ruble-sign"></i>
           </div>
-          <p className={`card-text ${styles.weight}`}>{product.wight} </p>
-          <h5 className={`card-title ${styles.productName}`}>{product.name}</h5>
+          <p className={`card-text ${styles.weight}`}>{data.wight} </p>
+          <h5 className={`card-title ${styles.productName}`}>{data.name}</h5>
           <br />
           <button
-            id={product._id}
+            id={data._id}
             className={`btn ${styles.btnStyle}`}
-            onClick={() =>
-              goToBasket(product._id, product.discount, product.price)
-            }
+            onClick={() => goToBasket(data._id, data.discount, data.price)}
           >
             В корзину
           </button>
+        </div>
+        <div>
+          {data.reviews.map((el) => {
+            console.log(el);
+            return (
+              <div className="container col-6">
+                <p>Avtor: {el.author}</p>
+                <p>Rating: {el.rating}</p>
+                <p>Comment: {el.text}</p>
+                <hr />
+              </div>
+            );
+          })}
         </div>
       </div>
     );

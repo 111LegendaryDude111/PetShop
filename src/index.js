@@ -11,8 +11,13 @@ import { Stocks } from "./components/HomePage/Footer/Stocks/Stocks";
 import { Provider } from "react-redux";
 import { Basket } from "./components/Basket/Basket";
 import { configureStore } from "@reduxjs/toolkit";
-import { basketProductReducer, tokenReducer } from "./Redux/slices/slices";
+import {
+  basketProductReducer,
+  likedProductsReducer,
+  tokenReducer,
+} from "./Redux/slices/slices";
 import { DetailedProductCard } from "./components/HomePage/Main/DetailedProductCard/DetailedProductCard";
+import { LikedProducts } from "./components/LikedProducts/LikedProducts";
 
 const router = createBrowserRouter([
   {
@@ -43,12 +48,17 @@ const router = createBrowserRouter([
     path: "basket",
     element: <Basket />,
   },
+  {
+    path: "LikedProducts",
+    element: <LikedProducts />,
+  },
 ]);
 
 const store = configureStore({
   reducer: {
     basket: basketProductReducer,
     token: tokenReducer,
+    likes: likedProductsReducer,
   },
 });
 const queryClient = new QueryClient();

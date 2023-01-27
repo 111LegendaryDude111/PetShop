@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Search, Searchz } from "../../Search/Search";
+import { Searchz } from "../../Search/Search";
 import styles from "./styles.module.scss";
 
 export const Header = ({ setSearchValue, searchValue }) => {
   const navigate = useNavigate();
   const store = useSelector((state) => state);
-
   function goToProfile() {
     navigate("/userProfile");
   }
@@ -20,6 +18,9 @@ export const Header = ({ setSearchValue, searchValue }) => {
     navigate("/basket");
   }
 
+  function goToLikedProducts() {
+    navigate("/LikedProducts");
+  }
   return (
     <header className={`${styles.header}`}>
       <a href=" " className={styles.logoDiv} onClick={goToHomepage}>
@@ -27,21 +28,16 @@ export const Header = ({ setSearchValue, searchValue }) => {
         <h1>DogFood</h1>
       </a>
       <div className=" mb-3">
-        {/* <input
-          type="text"
-          className={`${styles.searchInput}`}
-          placeholder="Search"
-          onChange={(e) => setSearchValue(e.target.value)}
-          value={searchValue}
-        />
-        <i
-          className={`fa-solid fa-circle-xmark ${styles.cross}`}
-          onClick={() => setSearchValue("")}
-        ></i> */}
         <Searchz setSearchValue={setSearchValue} />
       </div>
       <div className={styles.rightAside}>
-        <span>
+        <span
+          className={styles.likesCountOfProductsContainer}
+          onClick={goToLikedProducts}
+        >
+          <span className={styles.likesCountOfProductsContainer__Likes}>
+            <div>{store.likes.length > 0 ? store.likes.length : ""}</div>
+          </span>
           <i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i>
         </span>
         <span

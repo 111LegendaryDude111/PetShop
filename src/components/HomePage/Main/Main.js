@@ -6,16 +6,16 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from "./styles.module.scss";
 import "./likeAndUnlike.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addProductsInBasket,
   addTokenRedux,
 } from "../../../Redux/slices/slices";
-import { DetailedProductCard } from "./DetailedProductCard/DetailedProductCard";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
+  const likes = useSelector((store) => store.likes);
   const { data, isLoading, isError, error, isSuccess } = useQuery({
     queryKey: ["products"],
     queryFn: getProductsWithQuery,
@@ -31,7 +31,6 @@ export const Main = ({ searchValue, setSearchValue }) => {
     // Запрос для отображения лайков
     fetch("https://api.react-learning.ru/v2/sm8/users/me", {
       headers: {
-        // authorization: store.token.token,
         authorization: tokenForFetch,
       },
     })
@@ -54,7 +53,6 @@ export const Main = ({ searchValue, setSearchValue }) => {
       return result;
     }
   }
-
   function goToBasket(id, discount, price) {
     dispatch(addProductsInBasket({ id, discount, price }));
   }
@@ -126,13 +124,7 @@ export const Main = ({ searchValue, setSearchValue }) => {
                     <span className={el.likes.includes(userId) ? "like" : ""}>
                       <Likes id={el._id} />
                     </span>
-                    <div
-                      className="card-body"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        goToDetailedProductCard(el._id, el.name);
-                      }}
-                    >
+                    <div className="card-body">
                       <div
                         className={`card-text ${
                           el.discount ? styles.discPrice : styles.price
@@ -151,7 +143,13 @@ export const Main = ({ searchValue, setSearchValue }) => {
                       <p className={`card-text ${styles.weight}`}>
                         {el.wight}{" "}
                       </p>
-                      <h5 className={`card-title ${styles.productName}`}>
+                      <h5
+                        className={`card-title ${styles.productName}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          goToDetailedProductCard(el._id, el.name);
+                        }}
+                      >
                         {el.name}
                       </h5>
                       <br />
