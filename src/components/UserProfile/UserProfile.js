@@ -23,6 +23,11 @@ export const UserProfile = () => {
       },
     })
       .then((res) => res.json())
+      .then((data) => {
+        setName(data.name);
+        setDesription(data.about);
+        return data;
+      })
       .catch((err) => alert(err.message));
   }
 
@@ -44,7 +49,11 @@ export const UserProfile = () => {
       }),
     })
       .then((resp) => resp.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setDesription(data.about);
+        setName(data.name);
+        return data;
+      });
   }
 
   if (isLoading) {
@@ -53,8 +62,8 @@ export const UserProfile = () => {
     return (
       <div className={styles.user_profile}>
         <img src={data.avatar} alt="UserPhoto" className={styles.user_avatar} />
-        <h2>{data.name}</h2>
-        <p> {data.about}</p>
+        <h2>{name}</h2>
+        <p> {description}</p>
         <p> {data.email} </p>
         <div>
           <button className="btn btn-primary" onClick={signOut}>
