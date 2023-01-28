@@ -76,6 +76,10 @@
 
 .productName {
   margin: 0px 0 1.5rem 0;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .oldPrice {
