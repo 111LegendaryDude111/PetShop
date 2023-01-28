@@ -1,5 +1,4 @@
-import { createRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addProductsInBasket } from "../../../Redux/slices/slices";
 import styles from "./styles.module.scss";
 import { deleteProductInLikedProducts } from "../../../Redux/slices/slices";

@@ -6,10 +6,11 @@ import { addProductsInBasket } from "../../../../Redux/slices/slices";
 import { tokenForFetch } from "../../../assets";
 import { Loader } from "../../../Loader/Loader";
 import { Likes } from "../Likes/Likes";
+import { ModalForComment } from "./ModalForComment/ModalForComment";
 import styles from "./styles.module.scss";
 
 export const DetailedProductCard = () => {
-  const { isLoading, isSuccess, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["productData"],
     queryFn: getProduct,
   });
@@ -52,6 +53,7 @@ export const DetailedProductCard = () => {
   function goToBasket(id, discount, price) {
     dispatch(addProductsInBasket({ id, discount, price }));
   }
+
   if (isLoading) {
     return <Loader />;
   } else
@@ -99,12 +101,12 @@ export const DetailedProductCard = () => {
             В корзину
           </button>
         </div>
-        <div>
+        <div className={styles.comments}>
           {data.reviews.map((el) => {
             console.log(el);
             return (
-              <div className="container col-6">
-                <p>Avtor: {el.author}</p>
+              <div className={`container col-6 `}>
+                <p>Author: {el.author}</p>
                 <p>Rating: {el.rating}</p>
                 <p>Comment: {el.text}</p>
                 <hr />
@@ -112,6 +114,7 @@ export const DetailedProductCard = () => {
             );
           })}
         </div>
+        <ModalForComment id={data._id} />
       </div>
     );
 };
