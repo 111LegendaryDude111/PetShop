@@ -5,3 +5,17 @@
 .inactive {
   display: none;
 }
+
+
+.cross{
+  position: absolute;
+    right: 4rem;
+    font-size: 4rem;
+    top: 1rem;
+    padding: 1rem;
+}
+
+.cross:hover{
+  border: 1px solid;
+    border-radius: 6rem;
+}

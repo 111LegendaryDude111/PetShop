@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import modalStyles from "./modalStyles.css";
 import { tokenForFetch } from "../../../../assets";
@@ -6,6 +6,19 @@ import { tokenForFetch } from "../../../../assets";
 export const ModalForComment = ({ id }) => {
   const ref = useRef();
   const [comment, setComment] = useState("");
+  useEffect(() => {
+    const onKeypress = e => {
+      if(e.key === 'Escape' && ref.current.classList.contains("active") === true){
+        modalToogle()
+      }
+    };
+    document.addEventListener('keydown', onKeypress);
+    return () => {
+      document.removeEventListener('keydown', onKeypress);
+    };
+  }, []);
+
+
 
   function modalToogle() {
     if (ref.current.classList.contains("active")) {
@@ -50,7 +63,7 @@ export const ModalForComment = ({ id }) => {
           modalToogle();
           setComment("");
         }}
-        className="inactive"
+        className={`inactive ${styles.modal}`}
         ref={ref}
       >
         <input
@@ -62,6 +75,10 @@ export const ModalForComment = ({ id }) => {
           }}
         />
         <button type="submit">Отправить</button>
+
+        <i className="cross fa-solid fa-xmark"
+        onClick={modalToogle}
+        ></i>
       </form>
     </>
   );

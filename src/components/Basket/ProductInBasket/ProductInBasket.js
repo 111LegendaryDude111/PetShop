@@ -27,7 +27,6 @@ export const ProductInBasket = ({
   useEffect(() => {
     let tempProductCard = store.find(findinxeFunc);
     if (tempProductCard === undefined) {
-      console.log({ tempProductCard });
       return;
     } else {
       setCount(tempProductCard.count);

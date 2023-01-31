@@ -103,7 +103,6 @@ export const DetailedProductCard = () => {
         </div>
         <div className={styles.comments}>
           {data.reviews.map((el) => {
-            console.log(el);
             return (
               <div className={`container col-6 `}>
                 <p>Author: {el.author}</p>

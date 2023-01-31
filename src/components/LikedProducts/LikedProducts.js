@@ -26,7 +26,6 @@ export const LikedProducts = () => {
         .then((data) => tempArray.push(data));
     }
     setLikedProducts(tempArray);
-    console.log(tempArray);
     return tempArray;
   }
 
