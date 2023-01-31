@@ -137,3 +137,22 @@
 .like {
   color: red;
 }
+
+.addNewProductButton {
+  background-color: orange;
+  color: black;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  position: fixed;
+  bottom: 1rem;
+  right: 1.2rem;
+  width: 12rem;
+
+  &:hover {
+    transition: none;
+    border: 0.1rem solid black;
+    background-color: #f9e100c7;
+  }
+}

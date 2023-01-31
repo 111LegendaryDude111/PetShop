@@ -5,6 +5,18 @@
   margin: 1rem 30rem 1rem 2rem;
   padding: 1rem;
   border-radius: 1.1rem;
+
+  h4 {
+    margin-left: 2rem;
+  }
+}
+
+.spanCheckbox {
+  margin-left: 2rem;
+
+  input {
+    font-size: 10rem;
+  }
 }
 
 .imgInBasket {
@@ -16,7 +28,7 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  max-width: 34rem;
+  max-width: 78rem;
 }
 
 .counterOfProduct {
@@ -28,6 +40,14 @@
   width: 6rem;
   background-color: blanchedalmond;
   font-size: 1.2rem;
+  position: relative;
+  bottom: 1.7rem;
+}
+
+.stock {
+  font-size: 1.3rem;
+  position: relative;
+  bottom: 1.7rem;
 }
 
 .incrProd {
@@ -51,6 +71,10 @@
 }
 
 .delete {
+  position: relative;
+  content: "\f1f8";
+  bottom: 1.2rem;
+  font-size: 1.8rem;
   &:hover {
     color: red;
   }
@@ -62,4 +86,9 @@
 
 .price {
   color: black;
+  font-size: 1.2rem;
+  font-weight: 600;
+  bottom: 2rem;
+  position: relative;
+  left: 2rem;
 }

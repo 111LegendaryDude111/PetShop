@@ -45,7 +45,7 @@ export const ProductInBasket = ({
           <img src={img} className={styles.imgInBasket} />
         </span>
         <h4>{name}</h4>
-        <span>
+        <span className={styles.spanCheckbox}>
           <input
             type="checkbox"
             checked={checked}
@@ -57,7 +57,7 @@ export const ProductInBasket = ({
       </div>
       <div className={styles.priceCount}>
         <div className={styles.price}>
-          {" " + price === 1 ? price : price * count} р
+          {" " + price === 1 ? price : Math.round(price * count)} р
         </div>
         <div className={styles.counterOfProduct}>
           <button
@@ -76,7 +76,7 @@ export const ProductInBasket = ({
             }
           ></button>
         </div>
-        <div>Товаров в наличии: {stock}</div>
+        <div className={styles.stock}>Товаров в наличии: {stock}</div>
         <div>
           <i
             className={`fa-solid fa-trash ${styles.delete}`}

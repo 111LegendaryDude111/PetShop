@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { tokenForFetch } from "../assets";
 import { ProductInLikedProducts } from "./ProductInLikedProducts/ProductInLikedProducts";
+import styles from "./styles.module.scss";
 
 export const LikedProducts = () => {
   const likes = useSelector((store) => store.likes);
@@ -30,8 +31,8 @@ export const LikedProducts = () => {
   }
 
   return (
-    <div className="container">
-      <h2>Избранные товары: </h2>
+    <div className="container-xxl">
+      <h2 className={styles.h2}>Избранные товары: </h2>
       <div>
         {likedProducts.map((el, i) => {
           return (

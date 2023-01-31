@@ -33,8 +33,8 @@ export const ModalForComment = ({ id }) => {
     }
   }
 
-  function addComment() {
-    fetch(`https://api.react-learning.ru/products/review/${id}`, {
+  async function addComment() {
+    return await fetch(`https://api.react-learning.ru/products/review/${id}`, {
       method: "POST",
       headers: {
         authorization: tokenForFetch,

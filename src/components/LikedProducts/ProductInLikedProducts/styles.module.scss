@@ -5,6 +5,11 @@
   margin: 1rem 30rem 1rem 2rem;
   padding: 1rem;
   border-radius: 1.1rem;
+
+  h4 {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
 }
 
 .imgInBasket {
@@ -17,6 +22,9 @@
   display: flex;
   justify-content: space-between;
   max-width: 34rem;
+  bottom: -0.3rem;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 .counterOfProduct {
@@ -50,6 +58,13 @@
   }
 }
 
+.spanForDelete {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  position: relative;
+  bottom: -0.3rem;
+}
+
 .delete {
   &:hover {
     color: red;
@@ -62,4 +77,18 @@
 
 .price {
   color: black;
+}
+
+.basketAndDelete {
+  position: relative;
+  bottom: 4rem;
+  left: 38rem;
+}
+
+.stock {
+  font-size: 1.2rem;
+  font-weight: 600;
+  position: relative;
+  left: 18rem;
+  bottom: 1.7rem;
 }

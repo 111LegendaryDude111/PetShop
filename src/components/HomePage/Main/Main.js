@@ -16,6 +16,7 @@ import { AddNewProduct } from "./AddNewProduct/AddNewProduct";
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
   const likes = useSelector((store) => store.likes);
   const { data, isLoading, isError, error, isSuccess } = useQuery({
     queryKey: ["products"],
@@ -76,7 +77,14 @@ export const Main = ({ searchValue, setSearchValue }) => {
 
     return (
       <main>
-        <AddNewProduct/>
+        <button
+          onClick={() => setModal((prev) => !prev)}
+          className={styles.addNewProductButton}
+        >
+          {" "}
+          Добавить товар
+        </button>
+        <AddNewProduct modal={modal} setModal={setModal} />
         <div className={`container ${styles.containerPaddings}`}>
           <div className="row justify-content-center">
             {filtredProducts.length < 1 ? (

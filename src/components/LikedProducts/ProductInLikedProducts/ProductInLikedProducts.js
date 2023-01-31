@@ -46,9 +46,10 @@ export const ProductInLikedProducts = ({
           {discount ? price - (price * discount) / 100 : price} р
         </div>
       </div>
-      <div>Товаров в наличии: {stock}</div>
-      <div>
+      <div className={styles.stock}>Товаров в наличии: {stock}</div>
+      <div className={styles.basketAndDelete}>
         <span
+          className={styles.spanForDelete}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -59,7 +60,7 @@ export const ProductInLikedProducts = ({
         </span>
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary ml-10"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

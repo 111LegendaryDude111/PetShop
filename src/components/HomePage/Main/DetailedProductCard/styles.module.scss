@@ -91,10 +91,23 @@
 }
 
 .comments {
-  position: absolute;
-  top: 1rem;
-  left: 18rem;
+  position: relative;
+  top: 5rem;
+  left: 10rem;
   width: 36rem;
+
+  span {
+    position: relative;
+    left: 9rem;
+  }
+}
+
+.description {
+  position: absolute;
+  top: 3rem;
+  left: 20rem;
+  min-width: 23rem;
+  max-height: 15rem;
 }
 
 // Товары не найдены
