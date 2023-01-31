@@ -49,6 +49,7 @@ export const ProductInBasket = ({
           <input
             type="checkbox"
             checked={checked}
+            // className={styles.}
             onChange={(e) =>
               dispatch(changeStatusOfProductInBasket(idRef.current.id))
             }
