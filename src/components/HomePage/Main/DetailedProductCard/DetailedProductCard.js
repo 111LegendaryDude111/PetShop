@@ -33,6 +33,7 @@ export const DetailedProductCard = () => {
         }
       );
       let result = await response.json();
+      console.log(result)
       return result;
     } catch (err) {
       return err;
@@ -59,15 +60,15 @@ export const DetailedProductCard = () => {
   } else
     return (
       <div key={data._id} className={`card col col-3 ${styles.divCard}`}>
-        <span className={styles.discountPrice}>
+        <span className={styles.discountPrice} key={data._id + 1}>
           {data.discount ? `-${data.discount}%` : ""}
         </span>
-        <span className={styles.newProduct}>
+        <span className={styles.newProduct} key={data._id + 2}>
           {data.tags[0] === "new" ? `Новинка` : ""}
         </span>
-        <span className={styles.spanForImg}>
+        <span className={styles.spanForImg} key={data._id + 3}>
           <img
-            key={data.pictures}
+            // key={data.pictures}
             src={data.pictures}
             className={`card-img-top ${styles.cardImg}`}
             alt={data.name}
@@ -76,13 +77,13 @@ export const DetailedProductCard = () => {
         <span className={data.likes.includes(userId) ? "like" : ""}>
           <Likes id={data._id} />
         </span>
-        <div className="card-body">
+        <div className="card-body" key={data._id + 5}>
           <div
             className={`card-text ${
               data.discount ? styles.discPrice : styles.price
             }`}
           >
-            <div className={styles.oldPrice}>
+            <div className={styles.oldPrice} key={data._id + 6}>
               {data.discount ? data.price + "P" : ""}
             </div>
             {data.discount
@@ -90,21 +91,23 @@ export const DetailedProductCard = () => {
               : data.price}{" "}
             <i className="fa-solid fa-ruble-sign"></i>
           </div>
-          <p className={`card-text ${styles.weight}`}>{data.wight} </p>
-          <h5 className={`card-title ${styles.productName}`}>{data.name}</h5>
+          <p className={`card-text ${styles.weight}`} key={data._id + 7}>{data.wight} </p>
+          <h5 className={`card-title ${styles.productName}`} key={data._id + 8}>{data.name}</h5>
           <br />
           <button
             id={data._id}
             className={`btn ${styles.btnStyle}`}
             onClick={() => goToBasket(data._id, data.discount, data.price)}
+            key={data._id + 9}
           >
             В корзину
           </button>
         </div>
-        <div className={styles.comments}>
-          {data.reviews.map((el) => {
+        <div className={styles.comments} 
+        key={data._id + 10}>
+          {data.reviews.map((el,i) => {
             return (
-              <div className={`container col-6 `}>
+              <div className={`container col-6 `} key={i}>
                 <p>Author: {el.author}</p>
                 <p>Rating: {el.rating}</p>
                 <p>Comment: {el.text}</p>

@@ -6,6 +6,8 @@ import { tokenForFetch } from "../../../../assets";
 export const ModalForComment = ({ id }) => {
   const ref = useRef();
   const [comment, setComment] = useState("");
+  const [rate, setRate] = useState(5);
+
   useEffect(() => {
     const onKeypress = e => {
       if(e.key === 'Escape' && ref.current.classList.contains("active") === true){
@@ -38,6 +40,7 @@ export const ModalForComment = ({ id }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        rating: rate,
         text: comment,
       }),
     })
@@ -72,6 +75,17 @@ export const ModalForComment = ({ id }) => {
           value={comment}
           onChange={(e) => {
             setComment(e.target.value);
+          }}
+        />
+        <label htmlFor="inutRange">Рейтинг товара: {rate}</label>
+        <input
+        id="inutRange"
+          placeholder="Оставьте отзыв..."
+          type="range"
+          min={1}
+          max={5}
+          onChange={(e) => {
+            setRate(e.target.value);
           }}
         />
         <button type="submit">Отправить</button>
