@@ -1,10 +1,10 @@
 .modal {
   position: fixed;
+  top: 0rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: gray;
-  // opacity: 0.9;
+  background-color: #cfc8c8ed;
   z-index: 999;
   width: 100vw;
   height: 100vh;
@@ -21,9 +21,9 @@
 
   .cross {
     position: absolute;
-    right: -6rem;
+    right: -42rem;
     font-size: 4rem;
-    top: 1rem;
+    top: -10rem;
     padding: 1rem;
 
     &:hover {

@@ -6,7 +6,6 @@ const basketProductSlices = createSlice({
   initialState: defaultState.productsInTheBasket,
   reducers: {
     addProductsInBasket(state, action) {
-      console.log(action);
       function findinxeFunc(el, i, arr) {
         const element = el.id;
         return element === action.payload.id;

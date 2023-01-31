@@ -77,6 +77,7 @@ export const Main = ({ searchValue, setSearchValue }) => {
 
     return (
       <main>
+        {/* Модальное окно для добавления товара в БД */}
         <button
           onClick={() => setModal((prev) => !prev)}
           className={styles.addNewProductButton}
@@ -85,6 +86,7 @@ export const Main = ({ searchValue, setSearchValue }) => {
           Добавить товар
         </button>
         <AddNewProduct modal={modal} setModal={setModal} />
+        {/* Блок с карточками */}
         <div className={`container ${styles.containerPaddings}`}>
           <div className="row justify-content-center">
             {filtredProducts.length < 1 ? (

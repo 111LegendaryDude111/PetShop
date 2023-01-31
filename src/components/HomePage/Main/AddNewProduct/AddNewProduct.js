@@ -26,7 +26,7 @@ export const AddNewProduct = ({ modal, setModal }) => {
     return () => {
       document.removeEventListener("keydown", onKeypress);
     };
-  }, []);
+  }, [modal]);
 
   async function AddProduct() {
     return await fetch("https://api.react-learning.ru/products", {
