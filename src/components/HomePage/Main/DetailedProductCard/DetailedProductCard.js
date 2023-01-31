@@ -33,7 +33,6 @@ export const DetailedProductCard = () => {
         }
       );
       let result = await response.json();
-      console.log(result)
       return result;
     } catch (err) {
       return err;
@@ -91,8 +90,12 @@ export const DetailedProductCard = () => {
               : data.price}{" "}
             <i className="fa-solid fa-ruble-sign"></i>
           </div>
-          <p className={`card-text ${styles.weight}`} key={data._id + 7}>{data.wight} </p>
-          <h5 className={`card-title ${styles.productName}`} key={data._id + 8}>{data.name}</h5>
+          <p className={`card-text ${styles.weight}`} key={data._id + 7}>
+            {data.wight}{" "}
+          </p>
+          <h5 className={`card-title ${styles.productName}`} key={data._id + 8}>
+            {data.name}
+          </h5>
           <br />
           <button
             id={data._id}
@@ -103,9 +106,8 @@ export const DetailedProductCard = () => {
             В корзину
           </button>
         </div>
-        <div className={styles.comments} 
-        key={data._id + 10}>
-          {data.reviews.map((el,i) => {
+        <div className={styles.comments} key={data._id + 10}>
+          {data.reviews.map((el, i) => {
             return (
               <div className={`container col-6 `} key={i}>
                 <p>Author: {el.author}</p>

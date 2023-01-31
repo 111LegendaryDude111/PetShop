@@ -9,18 +9,19 @@ export const ModalForComment = ({ id }) => {
   const [rate, setRate] = useState(5);
 
   useEffect(() => {
-    const onKeypress = e => {
-      if(e.key === 'Escape' && ref.current.classList.contains("active") === true){
-        modalToogle()
+    const onKeypress = (e) => {
+      if (
+        e.key === "Escape" &&
+        ref.current.classList.contains("active") === true
+      ) {
+        modalToogle();
       }
     };
-    document.addEventListener('keydown', onKeypress);
+    document.addEventListener("keydown", onKeypress);
     return () => {
-      document.removeEventListener('keydown', onKeypress);
+      document.removeEventListener("keydown", onKeypress);
     };
   }, []);
-
-
 
   function modalToogle() {
     if (ref.current.classList.contains("active")) {
@@ -79,7 +80,7 @@ export const ModalForComment = ({ id }) => {
         />
         <label htmlFor="inutRange">Рейтинг товара: {rate}</label>
         <input
-        id="inutRange"
+          id="inutRange"
           placeholder="Оставьте отзыв..."
           type="range"
           min={1}
@@ -90,9 +91,7 @@ export const ModalForComment = ({ id }) => {
         />
         <button type="submit">Отправить</button>
 
-        <i className="cross fa-solid fa-xmark"
-        onClick={modalToogle}
-        ></i>
+        <i className="cross fa-solid fa-xmark" onClick={modalToogle}></i>
       </form>
     </>
   );

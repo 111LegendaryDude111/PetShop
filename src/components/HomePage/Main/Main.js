@@ -11,6 +11,7 @@ import {
   addProductsInBasket,
   addTokenRedux,
 } from "../../../Redux/slices/slices";
+import { AddNewProduct } from "./AddNewProduct/AddNewProduct";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
@@ -75,6 +76,7 @@ export const Main = ({ searchValue, setSearchValue }) => {
 
     return (
       <main>
+        <AddNewProduct/>
         <div className={`container ${styles.containerPaddings}`}>
           <div className="row justify-content-center">
             {filtredProducts.length < 1 ? (
