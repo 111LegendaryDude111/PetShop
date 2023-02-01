@@ -30,16 +30,15 @@ export const Main = ({ searchValue, setSearchValue }) => {
   });
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    const  queryString = qs.stringify({
+    const queryString = qs.stringify({
       dateSort,
       priceSort,
-      discountSort
+      discountSort,
     });
 
-    navigate(`?${queryString}`)
-  },[dateSort,priceSort,discountSort])
+    navigate(`?${queryString}`);
+  }, [dateSort, priceSort, discountSort]);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -101,14 +100,17 @@ export const Main = ({ searchValue, setSearchValue }) => {
     return (
       <main>
         {/* Модальное окно для добавления товара в БД */}
-        <button
-          onClick={() => setModal((prev) => !prev)}
-          className={styles.addNewProductButton}
-        >
-          {" "}
-          Добавить товар
-        </button>
         <div className={styles.filtrButtons}>
+          <span>
+            {" "}
+            <button
+              onClick={() => setModal((prev) => !prev)}
+              className={styles.addNewProductButton}
+            >
+              {" "}
+              Добавить товар
+            </button>{" "}
+          </span>
           <button onClick={(e) => setDiscountSort((prev) => !prev)}>
             {" "}
             {discountSort ? "Сбросить фильтр" : "Сортировать по скидке"}
