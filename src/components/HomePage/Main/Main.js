@@ -12,6 +12,7 @@ import {
   addTokenRedux,
 } from "../../../Redux/slices/slices";
 import { AddNewProduct } from "./AddNewProduct/AddNewProduct";
+import qs from "qs";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
@@ -28,6 +29,18 @@ export const Main = ({ searchValue, setSearchValue }) => {
     enabled: true,
   });
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const  queryString = qs.stringify({
+      dateSort,
+      priceSort,
+      discountSort
+    });
+
+    navigate(`?${queryString}`)
+  },[dateSort,priceSort,discountSort])
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
