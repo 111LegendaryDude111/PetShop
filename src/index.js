@@ -7,7 +7,6 @@ import { HomePage } from "./components/HomePage/HomePage";
 import { SignUp } from "./components/Authorisation/SignUp/SignUp";
 import { UserProfile } from "./components/UserProfile/UserProfile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Stocks } from "./components/HomePage/Footer/Stocks/Stocks";
 import { Provider } from "react-redux";
 import { Basket } from "./components/Basket/Basket";
 import { configureStore } from "@reduxjs/toolkit";
@@ -39,10 +38,6 @@ const router = createBrowserRouter([
   {
     path: "userProfile",
     element: <UserProfile />,
-  },
-  {
-    path: "stocks",
-    element: <Stocks />,
   },
   {
     path: "basket",

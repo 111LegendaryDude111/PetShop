@@ -6,7 +6,7 @@ import { Loader } from "../../Loader/Loader";
 import { Likes } from "./Likes/Likes";
 import styles from "./styles.module.scss";
 import "./likeAndUnlike.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addProductsInBasket,
   addTokenRedux,
@@ -15,13 +15,16 @@ import { AddNewProduct } from "./AddNewProduct/AddNewProduct";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
+  const [discountSort, setDiscountSort] = useState(false);
+  const [priceSort, setPriceSort] = useState(false);
+  const [dateSort, setDateSort] = useState(false);
+
+  let filtredProducts = [];
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
-  const likes = useSelector((store) => store.likes);
-  const { data, isLoading, isError, error, isSuccess } = useQuery({
+  const { data, isLoading, isError, error, isSuccess, isFetching } = useQuery({
     queryKey: ["products"],
     queryFn: getProductsWithQuery,
-    retry: true,
     enabled: true,
   });
   const navigate = useNavigate();
@@ -48,7 +51,6 @@ export const Main = ({ searchValue, setSearchValue }) => {
       },
     });
     let result = await response.json();
-
     if (response.status === 400 || response.status === 401) {
       console.log(`error: ${result.message}`);
     } else if (response.status === 200) {
@@ -63,18 +65,26 @@ export const Main = ({ searchValue, setSearchValue }) => {
     navigate(`/homepage/${id}`);
   }
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <Loader />;
   } else if (isError) {
     console.log(`error: ${error.message}`);
   } else if (isSuccess) {
-    let filtredProducts;
     if (searchValue.length < 1) {
       filtredProducts = data.products;
+      console.log(data.products);
+    } else if (discountSort) {
+      filtredProducts = data.products.filter((el) => el.discount > 1);
+    } else if (priceSort) {
+      filtredProducts = data.products.sort((a, b) => a.price - b.price);
+    } else if (dateSort) {
+      filtredProducts = data.products.sort(
+        (a, b) => Date.parse(a.created_at) - Date.parse(b.created_at)
+      );
+      filtredProducts.reverse();
     } else {
       filtredProducts = searchValue;
     }
-
     return (
       <main>
         {/* Модальное окно для добавления товара в БД */}
@@ -85,6 +95,20 @@ export const Main = ({ searchValue, setSearchValue }) => {
           {" "}
           Добавить товар
         </button>
+        <div className={styles.filtrButtons}>
+          <button onClick={(e) => setDiscountSort((prev) => !prev)}>
+            {" "}
+            {discountSort ? "Сбросить фильтр" : "Сортировать по скидке"}
+          </button>
+          <button onClick={(e) => setPriceSort((prev) => !prev)}>
+            {" "}
+            {priceSort ? "Сбросить фильтр" : "Сортировать по цене"}
+          </button>
+          <button onClick={(e) => setDateSort((prev) => !prev)}>
+            {" "}
+            {dateSort ? "Сбросить фильтр" : " Сортировать по дате"}
+          </button>
+        </div>
         <AddNewProduct modal={modal} setModal={setModal} />
         {/* Блок с карточками */}
         <div className={`container ${styles.containerPaddings}`}>

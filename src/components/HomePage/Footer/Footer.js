@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import Style from "./Style.module.scss";
 import React from "react";
 export const Footer = () => {
-  const navigate = useNavigate();
-
   return (
     <footer className={Style.footer}>
       <div className={Style.footerDivFirstColumn}>
@@ -15,9 +12,7 @@ export const Footer = () => {
       </div>
       <div className={Style.secondColumn}>
         <a href="#">Каталог</a>
-        <a href=" " onClick={() => navigate("/stocks")}>
-          Акции
-        </a>
+        <a href="#">Акции</a>
         <a href="#">Новости</a>
         <a href="#">Отзывы</a>
       </div>

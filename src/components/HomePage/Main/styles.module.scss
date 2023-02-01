@@ -148,11 +148,29 @@
   position: fixed;
   bottom: 14rem;
   right: 1.2rem;
-  width: 12rem;
+  width: 8%;
 
   &:hover {
     transition: none;
     border: 0.1rem solid black;
     background-color: #f9e100c7;
+  }
+}
+
+.filtrButtons {
+  display: flex;
+  position: relative;
+  left: 37%;
+  top: 0.5rem;
+
+  button {
+    background-color: orange;
+    color: black;
+    border-radius: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    width: 8%;
+    margin-left: 0.5rem;
   }
 }
