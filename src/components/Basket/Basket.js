@@ -5,6 +5,8 @@ import { deleteProductsInBasket } from "../../Redux/slices/slices";
 import { tokenForFetch } from "../assets";
 import { ProductInBasket } from "./ProductInBasket/ProductInBasket";
 import styles from "./styles.module.scss";
+import { Header } from "../HomePage/Header/Header";
+import { Footer } from "../HomePage/Footer/Footer";
 
 export const Basket = () => {
   const productsInTheBasket = useSelector((store) => store.basket);
@@ -55,26 +57,31 @@ export const Basket = () => {
 
   if (arrayForCards.length < 1) {
     return (
-      <div className={styles.basketIsEmpty}>
-        <h3> Корзина пуста </h3>
-        <button
-          className={styles.btnBackToHome}
-          onClick={() => navigate("/homepage")}
-        >
-          На главную
-        </button>
-        <button
-          className={styles.btnBackToHome}
-          onClick={() => navigate("/userProfile")}
-        >
-          Профиль
-        </button>
-      </div>
+      <>
+        <Header />
+        <div className={styles.basketIsEmpty}>
+          <h3> Корзина пуста </h3>
+          <button
+            className={styles.btnBackToHome}
+            onClick={() => navigate("/homepage")}
+          >
+            На главную
+          </button>
+          <button
+            className={styles.btnBackToHome}
+            onClick={() => navigate("/userProfile")}
+          >
+            Профиль
+          </button>
+        </div>
+        <Footer />
+      </>
     );
   }
 
   return (
     <div className={styles.basketStyle}>
+      <Header />
       <h2>Список товаров:</h2>
       <div>
         {arrayForCards.map((el, i) => {
@@ -97,6 +104,7 @@ export const Basket = () => {
           <button className={styles.btn}>Оформить</button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

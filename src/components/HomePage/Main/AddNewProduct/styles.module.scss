@@ -8,6 +8,7 @@
   z-index: 999;
   width: 100vw;
   height: 100vh;
+  padding: 12rem 10rem 0 0;
 
   .formModal {
     display: flex;
@@ -17,19 +18,33 @@
     position: relative;
     left: 45%;
     top: -10%;
+
+    button {
+      margin-top: 1rem;
+      margin-right: 1rem;
+      color: black;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: orange 0.1rem solid;
+      width: 7rem;
+      height: 2.5rem;
+      padding: 0.3rem;
+    }
   }
 
   .cross {
-    position: absolute;
+    position: relative;
     right: -42rem;
     font-size: 4rem;
-    top: -10rem;
+    top: -40rem;
+    left: 71rem;
     padding: 1rem;
 
-    &:hover {
-      border: 1px solid;
-      border-radius: 6rem;
-    }
+    // &:hover {
+    //   border: 1px solid;
+    //   border-radius: 6rem;
+    // }
   }
 
   label {

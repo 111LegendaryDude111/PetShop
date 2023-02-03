@@ -82,7 +82,6 @@ export const Main = ({ searchValue, setSearchValue }) => {
   } else if (isSuccess) {
     if (searchValue.length < 1) {
       filtredProducts = data.products;
-      console.log(data.products);
     } else if (discountSort) {
       filtredProducts = data.products.filter((el) => el.discount > 1);
     } else if (priceSort) {
@@ -99,28 +98,25 @@ export const Main = ({ searchValue, setSearchValue }) => {
       <main>
         {/* Модальное окно для добавления товара в БД */}
         <div className={styles.filtrButtons}>
-          <span>
+          <span
+            className={styles.addNewProductButton}
+            onClick={() => setModal((prev) => !prev)}
+          >
             {" "}
-            <button
-              onClick={() => setModal((prev) => !prev)}
-              className={styles.addNewProductButton}
-            >
-              {" "}
-              Добавить товар
-            </button>{" "}
+            <i className="fa-solid fa-circle-plus"></i>
           </span>
-          <button onClick={(e) => setDiscountSort((prev) => !prev)}>
+          <div onClick={(e) => setDiscountSort((prev) => !prev)}>
             {" "}
             {discountSort ? "Сбросить фильтр" : "Сортировать по скидке"}
-          </button>
-          <button onClick={(e) => setPriceSort((prev) => !prev)}>
+          </div>
+          <div onClick={(e) => setPriceSort((prev) => !prev)}>
             {" "}
             {priceSort ? "Сбросить фильтр" : "Сортировать по цене"}
-          </button>
-          <button onClick={(e) => setDateSort((prev) => !prev)}>
+          </div>
+          <div onClick={(e) => setDateSort((prev) => !prev)}>
             {" "}
             {dateSort ? "Сбросить фильтр" : " Сортировать по дате"}
-          </button>
+          </div>
         </div>
         <AddNewProduct modal={modal} setModal={setModal} />
         {/* Блок с карточками */}

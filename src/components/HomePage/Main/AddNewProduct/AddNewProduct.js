@@ -141,12 +141,11 @@ export const AddNewProduct = ({ modal, setModal }) => {
           />
 
           <button type="submit">Отправить</button>
-
-          <i
-            className={`${styles.cross} fa-solid fa-xmark`}
-            onClick={() => setModal(false)}
-          ></i>
         </form>
+        <i
+          className={`${styles.cross} fa-solid fa-xmark`}
+          onClick={() => setModal(false)}
+        ></i>
       </div>
     );
   }
