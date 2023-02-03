@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Searchz } from "../../Search/Search";
 import styles from "./styles.module.scss";
 
@@ -23,15 +23,17 @@ export const Header = ({ setSearchValue, searchValue }) => {
   }
   return (
     <header className={`${styles.header}`}>
-      <a href=" " className={styles.logoDiv} onClick={goToHomepage}>
+      <Link to={"/homepage"} href=" " className={styles.logoDiv}>
+        {/* // onClick={goToHomepage}> */}
         <i className={`fa-solid fa-paw ${styles.logo}`}></i>
         <h1>DogFood</h1>
-      </a>
+      </Link>
       <div className=" mb-3">
         <Searchz setSearchValue={setSearchValue} />
       </div>
       <div className={styles.rightAside}>
-        <span
+        <Link
+          to={"/LikedProducts"}
           className={styles.likesCountOfProductsContainer}
           onClick={goToLikedProducts}
         >
@@ -39,21 +41,22 @@ export const Header = ({ setSearchValue, searchValue }) => {
             <div>{store.likes.length > 0 ? store.likes.length : ""}</div>
           </span>
           <i className={`fa-solid fa-heart ${styles.fa_heart_style}`}></i>
-        </span>
-        <span
+        </Link>
+        <Link
+          to={"/basket"}
           className={styles.basketCountOfProductsContainer}
           onClick={goToBasket}
         >
-          <span className={styles.basketCountOfProductsContainer__Products}>
+          <Link className={styles.basketCountOfProductsContainer__Products}>
             <div>{store.basket.length > 0 ? store.basket.length : ""}</div>
-          </span>
+          </Link>
           <i
             className={`fa-solid fa-basket-shopping ${styles.fa_heart_style}`}
           ></i>
-        </span>
-        <span onClick={goToProfile}>
+        </Link>
+        <Link to={"/userProfile"}>
           <i className={`fa-solid fa-user ${styles.fa_heart_style}`}></i>
-        </span>
+        </Link>
       </div>
     </header>
   );

@@ -30,16 +30,14 @@ export const Main = ({ searchValue, setSearchValue }) => {
   });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const queryString = qs.stringify({
-      dateSort,
-      priceSort,
-      discountSort,
-    });
-
-    navigate(`?${queryString}`);
-  }, [dateSort, priceSort, discountSort]);
-
+  // useEffect(() => {
+  //   const queryString = qs.stringify({
+  //     dateSort,
+  //     priceSort,
+  //     discountSort,
+  //   });
+  //   navigate(`?${queryString}`);
+  // }, [dateSort, priceSort, discountSort]);
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/");
