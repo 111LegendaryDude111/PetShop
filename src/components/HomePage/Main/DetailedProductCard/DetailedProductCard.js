@@ -8,7 +8,8 @@ import { Loader } from "../../../Loader/Loader";
 import { Likes } from "../Likes/Likes";
 import { ModalForComment } from "./ModalForComment/ModalForComment";
 import styles from "./styles.module.scss";
-
+import { Header } from "../../Header/Header";
+// import { Footer } from "../../Footer/Footer";
 export const DetailedProductCard = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["productData"],
@@ -59,72 +60,79 @@ export const DetailedProductCard = () => {
     return <Loader />;
   } else
     return (
-      <div key={data._id} className={`card col col-3 ${styles.divCard}`}>
-        <span className={styles.discountPrice} key={data._id + 1}>
-          {data.discount ? `-${data.discount}%` : ""}
-        </span>
-        <span className={styles.newProduct} key={data._id + 2}>
-          {data.tags[0] === "new" ? `Новинка` : ""}
-        </span>
-        <span className={styles.spanForImg} key={data._id + 3}>
-          <img
-            // key={data.pictures}
-            src={data.pictures}
-            className={`card-img-top ${styles.cardImg}`}
-            alt={data.name}
-          />
-        </span>
-        <span className={data.likes.includes(userId) ? "like" : ""}>
-          <Likes id={data._id} />
-        </span>
-        <div className="card-body" key={data._id + 5}>
-          <div
-            className={`card-text ${
-              data.discount ? styles.discPrice : styles.price
-            }`}
-          >
-            <div className={styles.oldPrice} key={data._id + 6}>
-              {data.discount ? data.price + "P" : ""}
-            </div>
-            {data.discount
-              ? Math.round(data.price - data.price * (data.discount / 100))
-              : data.price}{" "}
-            <i className="fa-solid fa-ruble-sign"></i>
-          </div>
-          <p className={`card-text ${styles.weight}`} key={data._id + 7}>
-            {data.wight}{" "}
-          </p>
-          <h5 className={`card-title ${styles.productName}`} key={data._id + 8}>
-            {data.name}
-          </h5>
-          <br />
-          <p className={styles.description}>
-            Описание товара: <br />
-            {data.description}
-          </p>
-          <button
-            id={data._id}
-            className={`btn ${styles.btnStyle}`}
-            onClick={() => goToBasket(data._id, data.discount, data.price)}
-            key={data._id + 9}
-          >
-            В корзину
-          </button>
-        </div>
-        <div className={styles.comments} key={data._id + 10}>
-          <span>Отзывы о товаре: </span>
-          {data.reviews.map((el, i) => {
-            return (
-              <div className={`container col-6 mt-2`} key={i}>
-                <p>Author: {el.author}</p>
-                <p>Rating: {el.rating}</p>
-                <p>Comment: {el.text}</p>
-                <hr />
+      <>
+        <Header />
+
+        <div key={data._id} className={`card col col-3 ${styles.divCard}`}>
+          <span className={styles.discountPrice} key={data._id + 1}>
+            {data.discount ? `-${data.discount}%` : ""}
+          </span>
+          <span className={styles.newProduct} key={data._id + 2}>
+            {data.tags[0] === "new" ? `Новинка` : ""}
+          </span>
+          <span className={styles.spanForImg} key={data._id + 3}>
+            <img
+              // key={data.pictures}
+              src={data.pictures}
+              className={`card-img-top ${styles.cardImg}`}
+              alt={data.name}
+            />
+          </span>
+          <span className={data.likes.includes(userId) ? "like" : ""}>
+            <Likes id={data._id} />
+          </span>
+          <div className="card-body" key={data._id + 5}>
+            <div
+              className={`card-text ${
+                data.discount ? styles.discPrice : styles.price
+              }`}
+            >
+              <div className={styles.oldPrice} key={data._id + 6}>
+                {data.discount ? data.price + "P" : ""}
               </div>
-            );
-          })}
+              {data.discount
+                ? Math.round(data.price - data.price * (data.discount / 100))
+                : data.price}{" "}
+              <i className="fa-solid fa-ruble-sign"></i>
+            </div>
+            <p className={`card-text ${styles.weight}`} key={data._id + 7}>
+              {data.wight}{" "}
+            </p>
+            <h5
+              className={`card-title ${styles.productName}`}
+              key={data._id + 8}
+            >
+              {data.name}
+            </h5>
+            <br />
+            <p className={styles.description}>
+              Описание товара: <br />
+              {data.description}
+            </p>
+            <button
+              id={data._id}
+              className={`btn ${styles.btnStyle}`}
+              onClick={() => goToBasket(data._id, data.discount, data.price)}
+              key={data._id + 9}
+            >
+              В корзину
+            </button>
+          </div>
+          <div className={styles.comments} key={data._id + 10}>
+            <span>Отзывы о товаре: </span>
+            {data.reviews.map((el, i) => {
+              return (
+                <div className={`container col-6 mt-2`} key={i}>
+                  <p>Author: {el.author}</p>
+                  <p>Rating: {el.rating}</p>
+                  <p>Comment: {el.text}</p>
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
+          <ModalForComment id={data._id} />
         </div>
-        <ModalForComment id={data._id} />
-      </div>
+      </>
     );
 };
