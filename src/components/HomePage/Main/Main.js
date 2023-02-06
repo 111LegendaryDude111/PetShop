@@ -11,8 +11,7 @@ import {
   addProductsInBasket,
   addTokenRedux,
 } from "../../../Redux/slices/slices";
-import { AddNewProduct } from "./AddNewProduct/AddNewProduct";
-import qs from "qs";
+import { ModalFormik } from "../../ModalFormik/ModalFormik";
 
 export const Main = ({ searchValue, setSearchValue }) => {
   const [userId, setUserId] = useState("");
@@ -118,7 +117,7 @@ export const Main = ({ searchValue, setSearchValue }) => {
             {dateSort ? "Сбросить фильтр" : " Сортировать по дате"}
           </div>
         </div>
-        <AddNewProduct modal={modal} setModal={setModal} />
+        <ModalFormik modal={modal} setModal={setModal} />
         {/* Блок с карточками */}
         <div className={`container ${styles.containerPaddings}`}>
           <div className="row justify-content-center">

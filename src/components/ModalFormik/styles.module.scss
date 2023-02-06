@@ -1,0 +1,86 @@
+.modal {
+  position: fixed;
+  top: 0rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #cfc8c8ed;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  padding: 12rem 10rem 0 0;
+
+  .formModal {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    align-items: center;
+    position: relative;
+    left: 45%;
+    top: -10%;
+
+    button {
+      margin-top: 1rem;
+      margin-right: 1rem;
+      color: black;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: orange 0.1rem solid;
+      width: 7rem;
+      height: 2.5rem;
+      padding: 0.3rem;
+    }
+  }
+
+  .cross {
+    position: relative;
+    right: -42rem;
+    font-size: 4rem;
+    top: -40rem;
+    left: 71rem;
+    padding: 1rem;
+
+    // &:hover {
+    //   border: 1px solid;
+    //   border-radius: 6rem;
+    // }
+  }
+
+  label {
+    color: white;
+    font-size: 1.3rem;
+  }
+
+  input {
+    padding: 7px 15px;
+    &:focus {
+      &::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: transparent;
+      }
+      &:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: transparent;
+        opacity: 0;
+      }
+      &::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: transparent;
+        opacity: 0;
+      }
+      &:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: transparent;
+      }
+    }
+  }
+}
+
+.inactive {
+  display: none;
+}
+
+.error {
+  color: red;
+}

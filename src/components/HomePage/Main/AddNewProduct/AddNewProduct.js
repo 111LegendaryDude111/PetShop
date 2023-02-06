@@ -3,6 +3,7 @@ import { tokenForFetch } from "../../../assets";
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Loader } from "../../../Loader/Loader";
+import { ModalFormik } from "../../../ModalFormik/ModalFormik";
 
 export const AddNewProduct = ({ modal, setModal }) => {
   const modalForm = useRef();
