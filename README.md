@@ -1,1 +1,4 @@
-Pet shop.
+Install application
+
+npm i 
+npm run dev
